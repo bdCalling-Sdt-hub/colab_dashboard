@@ -193,7 +193,7 @@ const Transaction = () => {
       <div className="flex justify-between item-center mb-5">
         <div className="flex items-center gap-2">
           <Link to={-1}>
-            <FaArrowLeft size={18} className="text-yellow " />
+            <FaArrowLeft size={18} className="text-white " />
           </Link>
           <span className="font-semibold text-white text-[20px]">
             Transaction

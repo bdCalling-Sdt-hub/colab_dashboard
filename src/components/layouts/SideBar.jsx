@@ -44,6 +44,12 @@ const SideBar = () => {
       icon: <IoIosPeople size={25} />,
       sub_menu: false,
     },
+    {
+      path: "/transaction",
+      label: "Transaction",
+      icon: <IoIosPeople size={25} />,
+      sub_menu: false,
+    },
 
     {
       path: "/report",
