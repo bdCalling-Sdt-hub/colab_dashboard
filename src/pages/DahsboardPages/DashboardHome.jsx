@@ -1,67 +1,91 @@
-import React from "react";
-import income from "../../assets/income.png";
-import auction from "../../assets/auction.png";
-import user from "../../assets/user5.png";
 import IncomeOverview from "../../components/ui/IncomeOverview";
 import { Link } from "react-router-dom";
 import ActiveAuction from "./ActiveAuction";
-import TopBidderAndPerformingTable from "../../components/ui/TopBidderAndPerformingTable";
-import {
-  useGetAllAuctionQuery,
-  useGetDashboardDataQuery,
-} from "../../redux/api/dashboardApi";
-import { checkImageSource } from "../../lib/checkImageSource";
+import { useGetDashboardDataQuery } from "../../redux/api/dashboardApi";
 const DashboardHome = () => {
   const { data: dashboardData, isLoading } = useGetDashboardDataQuery();
-  const { data: getAuction, isLoading: auctionLoading } = useGetAllAuctionQuery(
-    { status: "ACTIVE" }
-  );
+  const userTable = [
+    {
+      id: "1",
+      key: 1,
+      name: "John Doe",
+      img: "https://via.placeholder.com/40",
+      email: "johndoe@example.com",
+      contactNumber: "+1234567890",
+      dob: "1990-01-01",
+      location: "New York, USA",
+      auctionWin: 5,
+      is_block: false,
+    },
+    {
+      id: "2",
+      key: 2,
+      name: "Jane Smith",
+      img: "https://via.placeholder.com/40",
+      email: "janesmith@example.com",
+      contactNumber: "Not available",
+      dob: "1985-05-15",
+      location: "London, UK",
+      auctionWin: 3,
+      is_block: true,
+    },
+    {
+      id: "3",
+      key: 3,
+      name: "Mike Johnson",
+      img: "https://via.placeholder.com/40",
+      email: "mikejohnson@example.com",
+      contactNumber: "+9876543210",
+      dob: "1995-12-20",
+      location: "Toronto, Canada",
+      auctionWin: 7,
+      is_block: false,
+    },
+    {
+      id: "4",
+      key: 4,
+      name: "Emily Davis",
+      img: "https://via.placeholder.com/40",
+      email: "emilydavis@example.com",
+      contactNumber: "Not available",
+      dob: "1992-03-10",
+      location: "Sydney, Australia",
+      auctionWin: 2,
+      is_block: false,
+    },
+    {
+      id: "5",
+      key: 5,
+      name: "Chris Brown",
+      img: "https://via.placeholder.com/40",
+      email: "chrisbrown@example.com",
+      contactNumber: "+1230984567",
+      dob: "1998-07-25",
+      location: "Berlin, Germany",
+      auctionWin: 4,
+      is_block: true,
+    },
+  ];
 
-  /** Top bidder data format for the table */
-  const topBidderDataFormat = dashboardData?.data?.topBidders
-    ?.slice(0, 3)
-    .map((bidder, i) => ({
-      key: i + 1,
-      bidder: bidder?.name,
-      img: bidder?.profile_image,
-      totalWin: bidder?.totalWin,
-    }));
-
-  /** Top performing auction table data format */
-  const topAuctionDataFormat = dashboardData?.data?.topAuctions
-    ?.slice(0, 3)
-    ?.map((auction, i) => {
-      return {
-        key: i + 1,
-        bidder: auction?.name,
-        img: auction?.images?.[0],
-        totalWin: auction?.currentPrice,
-      };
-    });
-
-  /** active user table data format */
-  const activeUserTableData = getAuction?.data?.result
-    ?.slice(0, 3)
-    ?.map((user, i) => {
-      return {
-        id: user?._id,
-        key: i + 1,
-        name: user?.name,
-        img: user?.images?.[0],
-        startingDate: user?.startingDate?.split("T")[0],
-        heightBidder: user?.winingBidder?.user?.name,
-        heightBidderImg: user?.winingBidder?.user?.profile_image || "No Bidder",
-        heightBid: user?.currentPrice || "No Bid",
-        totalBids: user?.totalBidPlace,
-      };
-    });
-
+  const userTableData = userTable?.map((user, i) => ({
+    id: user?._id,
+    key: i + 1,
+    name: user?.name,
+    // img: user?.profile_image,
+    img: `https://i.pravatar.cc/150?img=${i + 1}`,
+    email: user?.email,
+    contactNumber: user?.phone_number || "Not available",
+    dob: user?.date_of_birth?.slice("T")?.[0] || "Not available",
+    location: user?.location || "Not available",
+    auctionWin: user?.totalWin,
+    is_block: user?.is_block,
+  }));
   return (
     <div>
       <div className="grid grid-cols-12 gap-5">
         <div className="col-span-12 ">
           {/* stastics card */}
-          <div className="flex justify-between items-center shadow-xl">
+          <div className="flex justify-between items-center shadow-md">
             <div className="  w-full py-5 text-center bg-[#323232]  text-white border-r ">
               <p className="font-medium mt-2 text-5xl mb-4">
                 {dashboardData?.data?.totalIncome} 100
@@ -102,7 +126,7 @@ const DashboardHome = () => {
           <p className="text-xl font-semibold">New Subscriber</p>{" "}
           <Link to={`/active-auction`}>View all</Link>
         </div>
-        <ActiveAuction dataSource={activeUserTableData} />
+        <ActiveAuction dataSource={userTableData} />
       </div>
     </div>
   );
