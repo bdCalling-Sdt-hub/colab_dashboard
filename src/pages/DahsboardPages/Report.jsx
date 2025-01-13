@@ -29,12 +29,17 @@ const Report = () => {
       title: "Report From",
       dataIndex: "reportFrom",
       key: "reportFrom",
-      render: (_, record) => {
+      render: (_, record, i) => {
         console.log("record", record);
         return (
           <div className="flex items-center gap-2">
-            <img
+            {/* <img
               src={record?.img}
+              className="w-[40px] h-[40px] rounded-[8px]"
+              alt=""
+            /> */}
+            <img
+              src={`https://i.pravatar.cc/150?img=${i + 1}`}
               className="w-[40px] h-[40px] rounded-[8px]"
               alt=""
             />
@@ -50,12 +55,17 @@ const Report = () => {
       title: "Report To",
       dataIndex: "reportTo",
       key: "reportTo",
-      render: (_, record) => {
+      render: (_, record, i) => {
         console.log("record", record);
         return (
           <div className="flex items-center gap-2">
-            <img
+            {/* <img
               src={record?.img}
+              className="w-[40px] h-[40px] rounded-[8px]"
+              alt=""
+            /> */}
+            <img
+              src={`https://i.pravatar.cc/150?img=${i + 1}`}
               className="w-[40px] h-[40px] rounded-[8px]"
               alt=""
             />

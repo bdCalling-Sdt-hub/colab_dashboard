@@ -45,7 +45,7 @@ const IncomeOverview = () => {
     { name: "Feb", uv: 200 },
     { name: "Mar", uv: 900 },
     { name: "Apr", uv: 700 },
-    { name: "May", uv: 300 },
+    { name: "May", uv: 1500 },
     { name: "Jun", uv: 800 },
     { name: "Jul", uv: 400 },
     { name: "Aug", uv: 500 },
@@ -141,10 +141,10 @@ const IncomeOverview = () => {
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={data}
-              style={{ backgroundColor: "#323232  " }}
+              // style={{ backgroundColor: "#323232  " }}
               // margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#b3e5fc" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#555" />
               <XAxis dataKey="name" stroke="#fff" />
               <YAxis stroke="#fff" />
               <Tooltip
@@ -153,6 +153,8 @@ const IncomeOverview = () => {
                   borderColor: "#444",
                   color: "#fff",
                 }}
+                itemStyle={{ color: "#fff" }}
+                labelStyle={{ color: "#fff" }}
               />
               {/* Adjust barSize to increase bar width */}
               <Bar
