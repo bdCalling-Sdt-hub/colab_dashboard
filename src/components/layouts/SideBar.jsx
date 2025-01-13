@@ -9,8 +9,9 @@ import {
   MdOutlineCategory,
   MdOutlineDashboard,
   MdOutlineLogout,
-  MdOutlineTrendingUp,
 } from "react-icons/md";
+import { CiDollar } from "react-icons/ci";
+
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 // import logo from "../../assets/biddingLogo.png";
 const SideBar = () => {
@@ -47,7 +48,7 @@ const SideBar = () => {
     {
       path: "/transaction",
       label: "Transaction",
-      icon: <IoIosPeople size={25} />,
+      icon: <CiDollar size={25} />,
       sub_menu: false,
     },
 
