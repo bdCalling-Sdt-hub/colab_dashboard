@@ -179,7 +179,8 @@ const Transaction = () => {
     return {
       key: (currentPage - 1) * pageSize + (i + 1),
       name: item?.name,
-      img: item?.profile_image,
+      // img: item?.profile_image,
+      img: `https://i.pravatar.cc/150?img=${i + 1}`,
       email: item?.email,
       type: item?.type,
       transactionId: item?.transactionId,

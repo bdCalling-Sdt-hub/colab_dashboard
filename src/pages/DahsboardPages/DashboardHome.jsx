@@ -90,7 +90,7 @@ const DashboardHome = () => {
 
           {/* Income Overview */}
 
-          <div className="bg-[#323232] text-white shadow-2xl mt-5 rounded-md p-5 ">
+          <div className="bg-[#323232] text-white  mt-5 rounded-md p-5 ">
             <IncomeOverview />
           </div>
         </div>

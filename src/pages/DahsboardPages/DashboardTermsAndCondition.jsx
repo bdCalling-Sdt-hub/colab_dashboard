@@ -25,52 +25,7 @@ const DashboardTermsAndCondition = () => {
       )
       .catch((error) => toast.error(error?.data?.message));
   };
-  // const config = {
-  //   readonly: false,
-  //   placeholder: "Start typings...",
-  //   style: {
-  //     height: "70vh",
-  //   },
-  //   buttons: [
-  //     "image",
-  //     "fontsize",
-  //     "bold",
-  //     "italic",
-  //     "underline",
-  //     "|",
-  //     "font",
-  //     "brush",
-  //     "align",
-  //   ],
-  // };
-  // const config = {
-  //   readonly: false,
-  //   placeholder: "Start typing...",
-  //   style: {
-  //     height: "70vh",
-  //     backgroundColor: "#323232", // Set editor background to black
-  //     color: "white", // Set text color to white
-  //   },
-  //   buttons: [
-  //     "image",
-  //     "fontsize",
-  //     "bold",
-  //     "italic",
-  //     "underline",
-  //     "|",
-  //     "font",
-  //     "brush",
-  //     "align",
-  //   ],
-  //   events: {
-  //     afterInit: (editor) => {
-  //       // Set editor container styles after initialization
-  //       const editorContainer = editor.editor;
-  //       editorContainer.style.backgroundColor = "black";
-  //       editorContainer.style.color = "white";
-  //     },
-  //   },
-  // };
+
   const config = {
     readonly: false,
     placeholder: "Start typing...",

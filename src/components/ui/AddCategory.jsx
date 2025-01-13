@@ -91,10 +91,11 @@ const AddCategory = ({ getAllCategory }) => {
       title: "Image",
       dataIndex: "image",
       key: "image",
-      render: (text, record) => (
+      render: (text, record, i) => (
         <img
           className="rounded-md "
-          src={record.imageUrl}
+          // src={record.imageUrl}
+          src={`https://i.pravatar.cc/150?img=${i + 1}`}
           alt={record.categoryName}
           style={{ width: 50, height: 50 }}
         />
