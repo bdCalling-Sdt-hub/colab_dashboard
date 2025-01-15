@@ -1,5 +1,5 @@
 import { Form, Input, Modal, Spin, Upload } from "antd";
-import { useState } from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 import { PlusOutlined } from "@ant-design/icons";
 import { useCreateCategoryMutation } from "../../redux/api/dashboardApi";
@@ -49,13 +49,26 @@ const CategoryModal = ({ setOpenAddModal, openAddModal }) => {
         setFileList([]);
         setOpenAddModal(false);
       }}
+      className="custom-modal"
     >
       <h1 className="text-center font-medium mb-5">Add Category</h1>
       <Form layout="vertical" form={form} onFinish={onFinish}>
-        <Form.Item label="Category Name" name="name">
-          <Input required />
+        <Form.Item
+          label={<span className="text-white">Category Name</span>}
+          name="name"
+        >
+          <Input
+            style={{
+              backgroundColor: "#323232",
+              color: "white",
+            }}
+            placeholder="Enter category name"
+          />
         </Form.Item>
-        <Form.Item label="Image" style={{ width: "100%" }}>
+        <Form.Item
+          label={<span className="text-white">Image</span>}
+          style={{ width: "100%" }}
+        >
           <div style={{ width: "100%" }}>
             <Upload
               listType="picture-card"
@@ -66,7 +79,7 @@ const CategoryModal = ({ setOpenAddModal, openAddModal }) => {
               maxCount={1}
               required
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center gap-2 text-white">
                 <PlusOutlined />
                 <div>Add Image</div>
               </div>

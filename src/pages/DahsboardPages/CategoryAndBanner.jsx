@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import AddCategory from "../../components/ui/AddCategory";
 import AddBanner from "../../components/ui/AddBanner";
 import CategoryModal from "../../components/ui/CategoryModal";
-import BannerModal from "../../components/ui/BannerAModal";
 import { useGetAllCategoryQuery } from "../../redux/api/dashboardApi";
 
 const Category = () => {
@@ -13,12 +12,9 @@ const Category = () => {
 
   const [category, setCategory] = useState(true);
   const [openAddModal, setOpenAddModal] = useState(false);
-  const [openBannerModal, setOpenBannerModal] = useState(false);
-  const [modalTitle, setModalTitle] = useState("");
   // const [openCategoryModal, setOpenCategoryModal] = useState(false)
 
   const handleCategoryModal = () => {
-    setModalTitle("Add New Ads");
     setCategory(true);
   };
 
@@ -51,23 +47,13 @@ const Category = () => {
           </button>
         </div>
 
-        {category ? (
-          <button
-            onClick={() => setOpenAddModal(true)}
-            className="bg-button-primary px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap"
-          >
-            <FaPlus />
-            Add Category
-          </button>
-        ) : (
-          <button
-            onClick={() => setOpenBannerModal(true)}
-            className="bg-yellow px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap"
-          >
-            <FaPlus />
-            Add Banner
-          </button>
-        )}
+        <button
+          onClick={() => setOpenAddModal(true)}
+          className="bg-button-primary px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap"
+        >
+          <FaPlus />
+          Add Category
+        </button>
       </div>
 
       {category ? (
@@ -78,10 +64,6 @@ const Category = () => {
       <CategoryModal
         setOpenAddModal={setOpenAddModal}
         openAddModal={openAddModal}
-      />
-      <BannerModal
-        setOpenBannerModal={setOpenBannerModal}
-        openBannerModal={openBannerModal}
       />
     </div>
   );

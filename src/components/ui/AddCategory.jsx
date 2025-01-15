@@ -200,10 +200,13 @@ const AddCategory = ({ getAllCategory }) => {
           setIsModalOpen(false);
           setFileList([]);
         }}
+        className="custom-modal"
       >
-        <h1 className="text-center font-medium mb-5">Edit Category</h1>
-        <Form layout="vertical" form={form} onFinish={handleUpdateCategory}>
-          <Form.Item label="Category Name" name="name">
+        <h1 className="text-center font-medium mb-5 text-white">
+          Edit Category
+        </h1>
+        {/* <Form layout="vertical" form={form} onFinish={handleUpdateCategory}>
+          <Form.Item label="Category Name" name="name" className="text-white">
             <Input defaultValue={modalData?.categoryName} />
           </Form.Item>
 
@@ -237,6 +240,72 @@ const AddCategory = ({ getAllCategory }) => {
             <Form.Item className="w-full">
               <button
                 className="bg-[#d9000a] text-white w-full p-1 rounded-md"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Cancel
+              </button>
+            </Form.Item>
+          </div>
+        </Form> */}
+        <Form layout="vertical" form={form} onFinish={handleUpdateCategory}>
+          {/* Category Name */}
+          <Form.Item
+            label={<span className="text-white">Category Name</span>}
+            name="name"
+            className="text-white"
+          >
+            <Input
+              defaultValue={modalData?.categoryName}
+              style={{
+                backgroundColor: "#323232",
+                color: "white",
+              }}
+              placeholder="Enter category name"
+            />
+          </Form.Item>
+
+          {/* Image Upload */}
+          <Form.Item
+            label={<span className="text-white">Image</span>}
+            style={{ width: "100%" }}
+          >
+            <div style={{ width: "100%" }}>
+              <Upload
+                listType="picture-card"
+                fileList={fileList}
+                onChange={handleUploadChange}
+                beforeUpload={() => false}
+                multiple={false}
+                className="upload-full-width"
+                maxCount={1}
+              >
+                {fileList.length >= 1 ? null : (
+                  <div className="flex items-center justify-center gap-2 text-white">
+                    <PlusOutlined />
+                    <div>Add Image</div>
+                  </div>
+                )}
+              </Upload>
+            </div>
+          </Form.Item>
+
+          {/* Buttons */}
+          <div className="flex justify-between gap-3">
+            {/* Save Button */}
+            <Form.Item className="w-full">
+              <Button
+                disabled={isLoading}
+                className="w-full bg-[#7b00ff] text-white hover:bg-purple-700"
+                htmlType="submit"
+              >
+                {isLoading ? <Spin /> : "Save"}
+              </Button>
+            </Form.Item>
+
+            {/* Cancel Button */}
+            <Form.Item className="w-full">
+              <button
+                className="bg-[#d9000a] text-white w-full p-1 rounded-md hover:bg-red-700"
                 onClick={() => setIsModalOpen(false)}
               >
                 Cancel

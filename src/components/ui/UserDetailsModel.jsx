@@ -1,4 +1,5 @@
 import { Modal } from "antd";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
 
 const UserDetailsModel = ({ setOpenAddModal, openAddModal, userDetails }) => {
   console.log(userDetails);
@@ -31,6 +32,11 @@ const UserDetailsModel = ({ setOpenAddModal, openAddModal, userDetails }) => {
               className="rounded-full"
               src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8"
               alt="User Profile"
+            />
+            <RiVerifiedBadgeFill
+              className="absolute top-20 right-56"
+              fontSize={20}
+              color="#138DF0"
             />
           </div>
           <div className="flex items-center flex-col text-center">
