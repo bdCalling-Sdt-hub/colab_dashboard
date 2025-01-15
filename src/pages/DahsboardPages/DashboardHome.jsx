@@ -124,7 +124,7 @@ const DashboardHome = () => {
       <div className="bg-[#323232] rounded-md p-5 mt-5 text-white">
         <div className="flex items-center justify-between my-5 ">
           <p className="text-xl font-semibold">New Subscriber</p>{" "}
-          <Link to={`/active-auction`}>View all</Link>
+          <Link to={`/user-managment`}>View all</Link>
         </div>
         <ActiveAuction dataSource={userTableData} />
       </div>

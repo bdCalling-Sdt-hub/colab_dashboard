@@ -6,7 +6,6 @@ import { useState } from "react";
 const ActiveAuction = ({ dataSource }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [userDetails, setUserDetails] = useState({});
-  console.log(userDetails);
   const handleModel = (details) => {
     setUserDetails(details);
     setOpenAddModal(true);

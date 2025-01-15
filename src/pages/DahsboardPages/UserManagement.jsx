@@ -1,5 +1,5 @@
 import { Form, Input, Modal, Select, Table } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaArrowLeft } from "react-icons/fa";
 import { MdBlock } from "react-icons/md";
@@ -12,8 +12,11 @@ import {
 import { toast } from "sonner";
 import { LuEye } from "react-icons/lu";
 import Button from "../../components/ui/Button";
+import UserDetailsModel from "../../components/ui/UserDetailsModel";
 
 const UserManagement = () => {
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [userDetails, setUserDetails] = useState({});
   const [form] = Form.useForm();
   const [sendCreditId, setSendCreditId] = useState("");
   const [searchParams, setSearchParams] = useState("");
@@ -22,6 +25,10 @@ const UserManagement = () => {
   const { data: getAllUsers } = useGetAllUsersQuery(searchParams);
   const [blockUnblockUser, { isLoading }] = useBlockUnblockUserMutation();
   const [sendCredit] = useSendCreditsMutation();
+  const handleModel = (details) => {
+    setUserDetails(details);
+    setOpenAddModal(true);
+  };
   const columns = [
     {
       title: "SL no",
@@ -78,10 +85,7 @@ const UserManagement = () => {
           )}
 
           <button
-            onClick={() => {
-              setSendCreditId(record?.id);
-              setOpenCreditModal(true);
-            }}
+            onClick={() => handleModel(record)}
             className="bg-button-primary text-white p-2 rounded"
           >
             <LuEye style={{ fontSize: "20px" }} />
@@ -282,6 +286,11 @@ const UserManagement = () => {
           </Modal>
         </div>
       </div>
+      <UserDetailsModel
+        setOpenAddModal={setOpenAddModal}
+        openAddModal={openAddModal}
+        userDetails={userDetails}
+      />
     </div>
   );
 };
