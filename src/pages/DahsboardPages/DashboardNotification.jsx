@@ -1,10 +1,7 @@
 import { Table } from "antd";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import {
-  useGetNotificationQuery,
-  useReadNotificationMutation,
-} from "../../redux/api/dashboardApi";
+import { useReadNotificationMutation } from "../../redux/api/dashboardApi";
 import { useSocketContext } from "../../lib/SocketProviders";
 
 const DashboardNotification = () => {

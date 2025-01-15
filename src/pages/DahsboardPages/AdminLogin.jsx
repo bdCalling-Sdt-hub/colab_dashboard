@@ -1,5 +1,4 @@
 import { Button, Checkbox, Form, Input } from "antd";
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginAdminMutation } from "../../redux/api/userApi";
 import { toast } from "sonner";

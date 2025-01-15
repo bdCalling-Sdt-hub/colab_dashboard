@@ -11,6 +11,7 @@ import {
 import { toast } from "sonner";
 
 const AddCategory = ({ getAllCategory }) => {
+  console.log("get all category", getAllCategory);
   const [deleteCategory] = useDeleteCategoryMutation();
   const [updateCategoryData, { isLoading }] = useUpdateCategoryMutation();
   const [fileList, setFileList] = useState([]);

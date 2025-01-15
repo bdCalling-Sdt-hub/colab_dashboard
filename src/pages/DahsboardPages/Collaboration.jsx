@@ -2,21 +2,20 @@ import { Empty, Pagination, Spin, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import { CiSearch } from "react-icons/ci";
 import { useGetTransactionQuery } from "../../redux/api/dashboardApi";
 import formatDate from "../../utils/dateFormat";
 const Collaboration = () => {
-  const [searchParams, setSearchParams] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+
   const { data: getAllTransaction, isLoading } = useGetTransactionQuery({
-    searchParams,
     page: currentPage,
     limit: pageSize,
   });
 
   const onChange = (page) => {
     setCurrentPage(page);
+    setPageSize(1);
   };
 
   const columns = [

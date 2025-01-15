@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form, Input, Spin } from "antd";
 import { IoCameraOutline } from "react-icons/io5";
 import {
@@ -7,7 +7,6 @@ import {
   useUpdateUserProfileMutation,
 } from "../../redux/api/userApi";
 import { toast } from "sonner";
-import { imageUrl } from "../../redux/api/baseApi";
 
 const Profile = () => {
   const [updateProfile, { isLoading }] = useUpdateUserProfileMutation();

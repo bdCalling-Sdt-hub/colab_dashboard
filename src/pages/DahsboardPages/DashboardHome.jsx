@@ -4,6 +4,7 @@ import ActiveAuction from "./ActiveAuction";
 import { useGetDashboardDataQuery } from "../../redux/api/dashboardApi";
 const DashboardHome = () => {
   const { data: dashboardData, isLoading } = useGetDashboardDataQuery();
+  console.log("isloading", isLoading);
   const userTable = [
     {
       id: "1",
