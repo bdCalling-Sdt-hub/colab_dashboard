@@ -1,4 +1,4 @@
-import { Form, Input, Modal, Select, Table } from "antd";
+import { Select, Table } from "antd";
 import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaArrowLeft } from "react-icons/fa";
@@ -7,24 +7,19 @@ import { Link } from "react-router-dom";
 import {
   useBlockUnblockUserMutation,
   useGetAllUsersQuery,
-  useSendCreditsMutation,
 } from "../../redux/api/dashboardApi";
 import { toast } from "sonner";
 import { LuEye } from "react-icons/lu";
-import Button from "../../components/ui/Button";
 import UserDetailsModel from "../../components/ui/UserDetailsModel";
 
 const UserManagement = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [userDetails, setUserDetails] = useState({});
-  const [form] = Form.useForm();
-  const [sendCreditId, setSendCreditId] = useState("");
   const [searchParams, setSearchParams] = useState("");
-  const [openCreditModal, setOpenCreditModal] = useState(false);
-  const [fileList, setFileList] = useState();
   const { data: getAllUsers } = useGetAllUsersQuery(searchParams);
+  console.log(getAllUsers);
   const [blockUnblockUser, { isLoading }] = useBlockUnblockUserMutation();
-  const [sendCredit] = useSendCreditsMutation();
+  console.log("isLoading", isLoading);
   const handleModel = (details) => {
     setUserDetails(details);
     setOpenAddModal(true);
@@ -182,28 +177,6 @@ const UserManagement = () => {
       .catch((error) => toast.error(error?.data?.message));
   };
 
-  const handleSendCredit = (values) => {
-    const creditAmount = values.creditAmount;
-
-    if (!creditAmount) {
-      return toast.error("Please provide a value");
-    }
-
-    const parsedAmount = Number(creditAmount);
-    if (isNaN(parsedAmount) || parsedAmount <= 0) {
-      return toast.error("Please provide a valid positive number");
-    }
-
-    sendCredit({ id: sendCreditId, creditAmount: values })
-      .unwrap()
-      .then((payload) => {
-        form.resetFields();
-        toast.success(payload.message);
-        setOpenCreditModal(false);
-      })
-      .catch((error) => toast.error(error?.data?.message));
-  };
-
   const handleChange = async () => {
     console.log("hanlde changes");
   };
@@ -262,28 +235,6 @@ const UserManagement = () => {
               },
             }}
           />
-          <Modal
-            open={openCreditModal}
-            centered
-            footer={false}
-            onCancel={() => {
-              setOpenCreditModal(false);
-              form.resetFields();
-            }}
-            // afterClose={() => form.resetFields()}
-          >
-            <h1 className="text-center font-medium mb-5">Send Credit</h1>
-            <Form onFinish={handleSendCredit} form={form}>
-              <Form.Item name="creditAmount">
-                <Input placeholder="Enter Credit" />
-              </Form.Item>
-              <div className="flex justify-between  gap-3">
-                <Form.Item className="w-full">
-                  <Button className="w-full">Send Credit</Button>
-                </Form.Item>
-              </div>
-            </Form>
-          </Modal>
         </div>
       </div>
       <UserDetailsModel
