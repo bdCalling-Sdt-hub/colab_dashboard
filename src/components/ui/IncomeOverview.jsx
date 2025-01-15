@@ -93,8 +93,20 @@ const IncomeOverview = () => {
             borderRadius: "8px",
           }}
         >
-          <div>
+          <div className="flex justify-between">
             <h1 className="text-xl font-semibold mb-4">Subscription Growth</h1>
+            <div className="flex gap-3">
+              <Select
+                style={{ width: 150 }}
+                onChange={handleChange}
+                defaultValue="2025"
+                options={[
+                  { value: 2025, label: 2025 },
+                  { value: 2025, label: 2025 },
+                  { value: 2025, label: 2025 },
+                ]}
+              />
+            </div>
           </div>
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
@@ -141,8 +153,20 @@ const IncomeOverview = () => {
           }}
           className="shadow-xl"
         >
-          <div>
+          <div className="flex justify-between">
             <h1 className="text-xl font-semibold mb-4">User Growth</h1>
+            <div className="flex gap-3">
+              <Select
+                style={{ width: 150 }}
+                onChange={handleChange}
+                defaultValue="2025"
+                options={[
+                  { value: 2025, label: 2025 },
+                  { value: 2025, label: 2025 },
+                  { value: 2025, label: 2025 },
+                ]}
+              />
+            </div>
           </div>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart

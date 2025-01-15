@@ -295,7 +295,7 @@ const AddCategory = ({ getAllCategory }) => {
             <Form.Item className="w-full">
               <Button
                 disabled={isLoading}
-                className="w-full bg-[#7b00ff] text-white hover:bg-purple-700"
+                className="w-full bg-button-primary text-white hover:bg-purple-700"
                 htmlType="submit"
               >
                 {isLoading ? <Spin /> : "Save"}
