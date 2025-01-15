@@ -1,5 +1,5 @@
 import { Form, Input, Modal, Popconfirm, Spin, Table, Upload } from "antd";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Button from "./Button";

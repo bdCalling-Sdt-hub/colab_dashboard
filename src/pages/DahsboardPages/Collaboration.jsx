@@ -187,7 +187,7 @@ const Collaboration = () => {
             Collaboration Management
           </span>
         </div>
-        <div>
+        {/* <div>
           <div className="relative">
             <input
               onChange={(e) => setSearchParams(e.target.value)}
@@ -199,7 +199,7 @@ const Collaboration = () => {
               <CiSearch style={{ color: "white" }} />
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="mt-2 ">
         <Table

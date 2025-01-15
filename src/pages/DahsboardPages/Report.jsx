@@ -267,7 +267,7 @@ const Report = () => {
           </span>
         </div>
         <div>
-          <div className="relative">
+          {/* <div className="relative">
             <input
               onChange={(e) => setSearchParams(e.target.value)}
               type="text"
@@ -277,7 +277,7 @@ const Report = () => {
             <span className="absolute left-3 top-2.5 text-gray-400">
               <CiSearch style={{ color: "white" }} />
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="mt-2 ">

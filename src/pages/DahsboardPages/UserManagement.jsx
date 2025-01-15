@@ -218,9 +218,9 @@ const UserManagement = () => {
           </div>
           <div className="flex gap-3">
             <Select
-              style={{ width: 120 }}
+              style={{ width: 150 }}
               onChange={handleChange}
-              placeholder="Select user type"
+              defaultValue="All"
               options={[
                 { value: "premium", label: "Premium User" },
                 { value: "normal", label: "Normal User" },

@@ -1,4 +1,4 @@
-import { Empty, Pagination, Spin, Table } from "antd";
+import { Empty, Pagination, Select, Spin, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
@@ -189,6 +189,8 @@ const Transaction = () => {
     };
   });
 
+  const handleChange = async () => {};
+
   return (
     <div className="bg-[#323232] rounded-md p-5">
       <div className="flex justify-between item-center mb-5">
@@ -201,17 +203,18 @@ const Transaction = () => {
           </span>
         </div>
         <div>
-          <div className="relative">
-            <input
-              onChange={(e) => setSearchParams(e.target.value)}
-              type="text"
-              placeholder="Search here..."
-              className="w-full pl-10 pr-4 py-1 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 "
-            />
-            <span className="absolute left-3 top-2.5 text-gray-400">
-              <CiSearch />
-            </span>
-          </div>
+          <Select
+            style={{ width: 200 }}
+            onChange={handleChange}
+            defaultValue="All Transaction"
+            options={[
+              {
+                value: "purchase-subscription",
+                label: "Purchase Subscription",
+              },
+              { value: "renew-subscription", label: "Renew Subscription" },
+            ]}
+          />
         </div>
       </div>
       <div className="mt-2 ">

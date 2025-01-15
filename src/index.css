@@ -1,11 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+VN:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+body {
+  font-family: "Poppins", serif;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
 
 *::-webkit-scrollbar {
   display: none;
+}
+
+Link,
+a,
+Table,
+Modal {
+  font-family: "Poppins", serif;
 }
 
 :where(
@@ -186,4 +195,26 @@
 
 .ant-input-password-icon {
   color: white !important;
+}
+
+/* 
+for model
+*/
+
+.custom-modal .ant-modal-content {
+  background-color: #323232 !important;
+  color: white;
+}
+.custom-modal .ant-modal-header {
+  background-color: #323232 !important;
+  border-bottom: none;
+}
+.custom-modal .ant-modal-body {
+  background-color: #323232 !important;
+}
+.custom-modal .ant-modal-close {
+  color: white !important;
+}
+.custom-modal .ant-modal-close:hover {
+  color: #cccccc !important; /* Optional: Slightly lighter color on hover */
 }

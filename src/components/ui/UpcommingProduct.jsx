@@ -1,4 +1,3 @@
-import React from "react";
 import img from "../../assets/image.png";
 import { FaRegStar } from "react-icons/fa";
 const UpcommingProduct = () => {

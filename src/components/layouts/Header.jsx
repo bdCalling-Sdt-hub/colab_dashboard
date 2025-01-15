@@ -30,11 +30,12 @@ const Header = () => {
       >
         <img
           className="h-12 w-12 rounded-full border border-yellow p-[1px] object-cover"
-          src={`${getUserInfo?.data?.profile_image}`}
+          // src={`${getUserInfo?.data?.profile_image}`}
+          src={`https://i.pravatar.cc/150?img=${1}`}
           alt=""
         />
-        <p className="font-medium text-[20px] text-white">
-          {getUserInfo?.data?.name}
+        <p className="font-medium text-[20px] text-white pl-4">
+          {getUserInfo?.data?.name || "Mr Admin"}
         </p>
       </div>
     </div>

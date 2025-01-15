@@ -1,7 +1,16 @@
 import { Table } from "antd";
 import { LuEye } from "react-icons/lu";
+import UserDetailsModel from "../../components/ui/UserDetailsModel";
+import { useState } from "react";
 
 const ActiveAuction = ({ dataSource }) => {
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [userDetails, setUserDetails] = useState({});
+  console.log(userDetails);
+  const handleModel = (details) => {
+    setUserDetails(details);
+    setOpenAddModal(true);
+  };
   const columns = [
     {
       title: "SL no",
@@ -41,7 +50,10 @@ const ActiveAuction = ({ dataSource }) => {
       key: "action",
       render: (_, record) => (
         <div className="flex items-center gap-2">
-          <button className="bg-button-primary text-white p-2 rounded">
+          <button
+            onClick={() => handleModel(record)}
+            className="bg-button-primary text-white p-2 rounded"
+          >
             <LuEye style={{ fontSize: "20px" }} />
           </button>
         </div>
@@ -55,6 +67,11 @@ const ActiveAuction = ({ dataSource }) => {
         columns={columns}
         className="custom-pagination "
         pagination={false}
+      />
+      <UserDetailsModel
+        setOpenAddModal={setOpenAddModal}
+        openAddModal={openAddModal}
+        userDetails={userDetails}
       />
     </div>
   );

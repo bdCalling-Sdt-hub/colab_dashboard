@@ -68,7 +68,6 @@ const SideBar = () => {
           label: "Profile",
           icon: <></>,
         },
-
         {
           path: "/terms-condition",
           label: "Terms & Condition",
@@ -106,7 +105,7 @@ const SideBar = () => {
   }, [openIndex]);
 
   return (
-    <div id="sidebar" className="flex flex-col gap-5  mt-[10px]">
+    <div id="sidebar" className="flex flex-col gap-5  mt-[10px] font-poppins">
       {/* <img src={logo} className="w-56" alt="logo" /> */}
       <div className="w-96 mb-14"></div>
       {links?.map((item, index) => {
@@ -152,9 +151,9 @@ const SideBar = () => {
                     <NavLink
                       to={sub_item?.path}
                       key={subIndex}
-                      className={`flex justify-center items-center  ${
+                      className={`flex ml-12 pl-2 items-center  ${
                         isSubItemActive
-                          ? "bg-[#B4007E] text-white"
+                          ? "bg-[#dd4bb1] text-white"
                           : " text-white  "
                       }    w-full py-2 mb-[1px] cursor-pointer `}
                     >
@@ -188,7 +187,7 @@ const SideBar = () => {
           navigate("/admin-login");
           localStorage.removeItem("token");
         }}
-        className="flex items-center pl-5 gap-2 w-full py-2 hover:bg-[#FEF6E7] hover:text-yellow text-white cursor-pointer"
+        className="flex items-center pl-5 gap-2 w-full py-2  hover:bg-[#B4007E] text-white cursor-pointer"
       >
         <MdOutlineLogout />
         Logout
