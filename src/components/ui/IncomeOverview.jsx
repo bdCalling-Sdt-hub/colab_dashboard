@@ -93,6 +93,9 @@ const IncomeOverview = () => {
             borderRadius: "8px",
           }}
         >
+          <div>
+            <h1 className="text-xl font-semibold mb-4">Subscription Growth</h1>
+          </div>
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
               width={400}
@@ -138,6 +141,9 @@ const IncomeOverview = () => {
           }}
           className="shadow-xl"
         >
+          <div>
+            <h1 className="text-xl font-semibold mb-4">User Growth</h1>
+          </div>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={data}
