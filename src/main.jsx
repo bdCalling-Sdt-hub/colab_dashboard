@@ -15,7 +15,7 @@ createRoot(document.getElementById("root")).render(
       </SocketProviders>
     </Providers>
     <Toaster
-      position="top-right"
+      position="top-center"
       richColors
       toastOptions={{
         duration: 1500,

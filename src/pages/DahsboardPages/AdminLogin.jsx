@@ -75,18 +75,7 @@ const AdminLogin = () => {
               }}
             />
           </Form.Item>
-          {/* <Form.Item
-            name="password"
-            label={<span style={{ color: "white" }}>Password</span>}
-          >
-            <Input.Password
-              placeholder="Enter password"
-              style={{
-                backgroundColor: "#323232",
-                color: "white",
-              }}
-            />
-          </Form.Item> */}
+
           <Form.Item
             name="password"
             label={<span style={{ color: "white" }}>Password</span>}
