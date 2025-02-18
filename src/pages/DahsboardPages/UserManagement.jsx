@@ -17,10 +17,12 @@ const UserManagement = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [userDetails, setUserDetails] = useState({});
   const [searchParams, setSearchParams] = useState("");
-  const [blockUnblockUser, { isLoading }] = useBlockUnblockUserMutation();
+  const [isPremium, setIsPremium] = useState(null);
   const { data: userData, isLoading: userDataLoading } = useGetAllUsersQuery({
     searchParams,
+    ...(isPremium !== null && isPremium !== undefined ? { isPremium } : {}),
   });
+  const [blockUnblockUser, { isLoading }] = useBlockUnblockUserMutation();
   console.log("isLoading", isLoading);
   const handleModel = (details) => {
     setUserDetails(details);
@@ -119,10 +121,6 @@ const UserManagement = () => {
       .catch((error) => toast.error(error?.data?.message));
   };
 
-  const handleChange = async () => {
-    console.log("hanlde changes");
-  };
-
   return (
     <div>
       <div className="p-5 bg-[#323232] rounded-md ">
@@ -136,7 +134,7 @@ const UserManagement = () => {
             </span>
           </div>
           <div className="flex gap-3">
-            <Select
+            {/* <Select
               style={{ width: 150 }}
               onChange={handleChange}
               defaultValue="All"
@@ -144,7 +142,17 @@ const UserManagement = () => {
                 { value: "premium", label: "Premium User" },
                 { value: "normal", label: "Normal User" },
               ]}
-            />
+            /> */}
+            <Select
+              value={isPremium}
+              onChange={(value) => setIsPremium(value)}
+              placeholder="Filter by Premium Status"
+              style={{ width: 200 }}
+            >
+              <Select.Option value={null}>All Users</Select.Option>
+              <Select.Option value={true}>Premium Users</Select.Option>
+              <Select.Option value={false}>Normal Users</Select.Option>
+            </Select>
 
             <div className="relative">
               <input

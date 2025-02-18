@@ -117,9 +117,15 @@ const dashboardApi = baseApi.injectEndpoints({
     }),
     /** User management */
     getAllUsers: builder.query({
-      query: ({ searchParams, limit }) => {
+      query: ({ searchParams, limit, isPremium }) => {
+        const params = new URLSearchParams();
+        if (searchParams) params.append("searchTerm", searchParams);
+        if (limit) params.append("limit", limit);
+        if (isPremium !== null && isPremium !== undefined) {
+          params.append("isPremium", isPremium);
+        }
         return {
-          url: `/normal-user/all-users?searchTerm=${searchParams}&limit=${limit}`,
+          url: `/normal-user/all-users?${params.toString()}`,
           method: "GET",
         };
       },
