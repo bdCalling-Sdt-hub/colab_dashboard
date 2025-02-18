@@ -11,14 +11,16 @@ import {
 import { toast } from "sonner";
 import { LuEye } from "react-icons/lu";
 import UserDetailsModel from "../../components/ui/UserDetailsModel";
+import { imageUrl } from "../../redux/api/baseApi";
 
 const UserManagement = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [userDetails, setUserDetails] = useState({});
   const [searchParams, setSearchParams] = useState("");
-  const { data: getAllUsers } = useGetAllUsersQuery(searchParams);
-  console.log(getAllUsers);
   const [blockUnblockUser, { isLoading }] = useBlockUnblockUserMutation();
+  const { data: userData, isLoading: userDataLoading } = useGetAllUsersQuery({
+    searchParams,
+  });
   console.log("isLoading", isLoading);
   const handleModel = (details) => {
     setUserDetails(details);
@@ -89,81 +91,21 @@ const UserManagement = () => {
       ),
     },
   ];
-  const userTable = [
-    {
-      id: "1",
-      key: 1,
-      name: "John Doe",
-      img: "https://via.placeholder.com/40",
-      email: "johndoe@example.com",
-      contactNumber: "+1234567890",
-      dob: "1990-01-01",
-      location: "New York, USA",
-      auctionWin: 5,
-      is_block: false,
-    },
-    {
-      id: "2",
-      key: 2,
-      name: "Jane Smith",
-      img: "https://via.placeholder.com/40",
-      email: "janesmith@example.com",
-      contactNumber: "Not available",
-      dob: "1985-05-15",
-      location: "London, UK",
-      auctionWin: 3,
-      is_block: true,
-    },
-    {
-      id: "3",
-      key: 3,
-      name: "Mike Johnson",
-      img: "https://via.placeholder.com/40",
-      email: "mikejohnson@example.com",
-      contactNumber: "+9876543210",
-      dob: "1995-12-20",
-      location: "Toronto, Canada",
-      auctionWin: 7,
-      is_block: false,
-    },
-    {
-      id: "4",
-      key: 4,
-      name: "Emily Davis",
-      img: "https://via.placeholder.com/40",
-      email: "emilydavis@example.com",
-      contactNumber: "Not available",
-      dob: "1992-03-10",
-      location: "Sydney, Australia",
-      auctionWin: 2,
-      is_block: false,
-    },
-    {
-      id: "5",
-      key: 5,
-      name: "Chris Brown",
-      img: "https://via.placeholder.com/40",
-      email: "chrisbrown@example.com",
-      contactNumber: "+1230984567",
-      dob: "1998-07-25",
-      location: "Berlin, Germany",
-      auctionWin: 4,
-      is_block: true,
-    },
-  ];
-
-  const userTableData = userTable?.map((user, i) => ({
+  const userTableData = userData?.data?.result?.map((user, i) => ({
     id: user?._id,
     key: i + 1,
     name: user?.name,
     // img: user?.profile_image,
-    img: `https://i.pravatar.cc/150?img=${i + 1}`,
+    img: user?.profile_image.startsWith("https")
+      ? user.profile_image
+      : `${imageUrl}${user?.profile_image}`,
     email: user?.email,
-    contactNumber: user?.phone_number || "Not available",
+    mainSkill: user?.mainSkill,
+    additionalSkills: user?.additionalSkills,
+    contactNumber: user?.phone || "Not available",
     dob: user?.date_of_birth?.slice("T")?.[0] || "Not available",
     location: user?.location || "Not available",
-    auctionWin: user?.totalWin,
-    is_block: user?.is_block,
+    isPremium: user?.isPremium,
   }));
 
   const handleBlockUnBlockUser = (email, is_block) => {
@@ -224,6 +166,7 @@ const UserManagement = () => {
             dataSource={userTableData}
             columns={columns}
             className="custom-pagination"
+            loading={userDataLoading}
             pagination={{
               pageSize: 10,
               showTotal: (total, range) =>
