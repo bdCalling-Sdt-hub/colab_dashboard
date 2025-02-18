@@ -191,37 +191,14 @@ const Profile = () => {
                     outline: "none", // Remove the outline
                   }}
                   className="text-[16px] leading-5 placeholder-white"
-                  placeholder="admin@gmail.com"
+                  placeholder=""
                   placeholderStyle={{
                     color: "white",
                   }}
                 />
               </Form.Item>
 
-              <Form.Item
-                name="contact"
-                label={
-                  <p className="text-[16px] text-white font-normal">Contact</p>
-                }
-              >
-                <Input
-                  style={{
-                    width: "100%",
-                    height: 40,
-                    border: "none", // Remove the border
-                    borderRadius: "5px",
-                    color: "#919191", // Text color inside the input
-                    backgroundColor: "#2F2F31", // Background color
-                    outline: "none", // Remove the outline
-                  }}
-                  className="text-[16px] leading-5 placeholder-white"
-                  placeholder="Contact Number"
-                  placeholderStyle={{
-                    color: "white",
-                  }}
-                />
-              </Form.Item>
-              <Form.Item
+              {/* <Form.Item
                 name="address"
                 label={
                   <p className="text-[16px] text-white font-normal">Address</p>
@@ -243,7 +220,7 @@ const Profile = () => {
                     color: "white",
                   }}
                 />
-              </Form.Item>
+              </Form.Item> */}
 
               <Form.Item
                 style={{

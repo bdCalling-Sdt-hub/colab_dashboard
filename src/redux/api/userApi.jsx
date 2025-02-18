@@ -23,7 +23,7 @@ const userApi = baseApi.injectEndpoints({
     getUserProfile: builder.query({
       query: () => {
         return {
-          url: "/admin/auth/profile",
+          url: "/user/get-my-profile",
           method: "GET",
         };
       },
