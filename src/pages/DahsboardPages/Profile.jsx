@@ -7,11 +7,12 @@ import {
   useUpdateUserProfileMutation,
 } from "../../redux/api/userApi";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [updateProfile, { isLoading }] = useUpdateUserProfileMutation();
   const [changePassword] = useChangePasswordMutation();
-
+  const navigate = useNavigate();
   const { data: getProfile } = useGetUserProfileQuery();
   const [image, setImage] = useState(null);
   const [form] = Form.useForm();
@@ -31,15 +32,18 @@ const Profile = () => {
     setImage(file);
   };
   const onFinish = (values) => {
-    if (values?.newPassword === values.currentPassword) {
+    if (values?.newPassword === values.oldPassword) {
       return setPassError("Your old password cannot be your new password");
     }
-    if (values?.newPassword !== values?.confirmPassword) {
+    if (values?.newPassword !== values?.confirmNewPassword) {
       return setPassError("Confirm password doesn't match");
     }
     changePassword(values)
       .unwrap()
-      .then((payload) => toast.success(payload?.message))
+      .then((payload) => {
+        toast.success(payload?.message);
+        navigate("/admin-login");
+      })
       .catch((error) => toast.error(error?.data?.message));
   };
   const onEditProfile = (values) => {
@@ -269,13 +273,15 @@ const Profile = () => {
         ) : (
           <div className="max-w-[481px] mx-auto rounded-lg p-6 bg-[#252525] text-white">
             <h1 className="text-center text-[var(--primary-color)] leading-7 text-2xl font-medium mb-7">
-              Edit Your Password
+              Change Your Password
             </h1>
             <Form layout="vertical" onFinish={onFinish} form={form}>
               <Form.Item
-                name="name"
+                name="oldPassword"
                 label={
-                  <p className="text-[16px] text-white font-normal">Name</p>
+                  <p className="text-[16px] text-white font-normal">
+                    Current Password
+                  </p>
                 }
               >
                 <Input
@@ -289,7 +295,7 @@ const Profile = () => {
                     outline: "none", // Remove the outline
                   }}
                   className="text-[16px] leading-5 placeholder-white"
-                  placeholder="Your Name"
+                  // placeholder="Your Name"
                   placeholderStyle={{
                     color: "white",
                   }}
@@ -297,9 +303,11 @@ const Profile = () => {
               </Form.Item>
 
               <Form.Item
-                name="name"
+                name="newPassword"
                 label={
-                  <p className="text-[16px] text-white font-normal">Name</p>
+                  <p className="text-[16px] text-white font-normal">
+                    New Password
+                  </p>
                 }
               >
                 <Input
@@ -313,7 +321,7 @@ const Profile = () => {
                     outline: "none", // Remove the outline
                   }}
                   className="text-[16px] leading-5 placeholder-white"
-                  placeholder="Your Name"
+                  // placeholder="Your Name"
                   placeholderStyle={{
                     color: "white",
                   }}
@@ -321,9 +329,11 @@ const Profile = () => {
               </Form.Item>
 
               <Form.Item
-                name="name"
+                name="confirmNewPassword"
                 label={
-                  <p className="text-[16px] text-white font-normal">Name</p>
+                  <p className="text-[16px] text-white font-normal">
+                    Retype New Password
+                  </p>
                 }
               >
                 <Input
@@ -337,7 +347,7 @@ const Profile = () => {
                     outline: "none", // Remove the outline
                   }}
                   className="text-[16px] leading-5 placeholder-white"
-                  placeholder="Your Name"
+                  // placeholder="Your Name"
                   placeholderStyle={{
                     color: "white",
                   }}
