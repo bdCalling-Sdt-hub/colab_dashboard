@@ -27,62 +27,6 @@ const dashboardApi = baseApi.injectEndpoints({
         };
       },
     }),
-    /** Auction management all api */
-    getAllAuction: builder.query({
-      query: ({ status, page }) => {
-        if (status) {
-          return {
-            url: `/auction?status=${status}`,
-            method: "GET",
-          };
-        } else {
-          return {
-            url: `/auction?page=${page}`,
-            method: "GET",
-          };
-        }
-      },
-      providesTags: ["allAuction"],
-    }),
-    createAuction: builder.mutation({
-      query: (formData) => {
-        return {
-          url: "/auction/create-auction",
-          method: "POST",
-          body: formData,
-        };
-      },
-      invalidatesTags: ["allAuction"],
-    }),
-    updateAuction: builder.mutation({
-      query: ({ formData, id }) => {
-        return {
-          url: `/auction/update-auction/${id}`,
-          method: "PATCH",
-          body: formData,
-        };
-      },
-      invalidatesTags: ["allAuction"],
-    }),
-    deleteAuction: builder.mutation({
-      query: (id) => {
-        return {
-          url: `/auction/delete-auction/${id}`,
-          method: "DELETE",
-        };
-      },
-      invalidatesTags: ["allAuction"],
-    }),
-    /** Order Management API */
-    getAllOrder: builder.query({
-      query: ({ page, limit }) => {
-        return {
-          url: `/order/get-all-orders?orderType=NORMAL&page=${page}&limit=${limit}`,
-          method: "GET",
-        };
-      },
-      providesTags: ["orderStatus"],
-    }),
 
     /** Category Api */
     getAllCategory: builder.query({
@@ -173,9 +117,9 @@ const dashboardApi = baseApi.injectEndpoints({
     }),
     /** User management */
     getAllUsers: builder.query({
-      query: (searchParams) => {
+      query: ({ searchParams, limit }) => {
         return {
-          url: `/dashboard/auth/get-all-user?searchTerm=${searchParams}`,
+          url: `/normal-user/all-users?searchTerm=${searchParams}&limit=${limit}`,
           method: "GET",
         };
       },
@@ -436,13 +380,8 @@ const dashboardApi = baseApi.injectEndpoints({
 
 export const {
   useGetDashboardDataQuery,
-  useGetAllAuctionQuery,
   useGetUserChartDataQuery,
   useGetSubscriptionChartDataQuery,
-  useDeleteAuctionMutation,
-  useCreateAuctionMutation,
-  useGetAllOrderQuery,
-  useUpdateAuctionMutation,
   useGetAllCategoryQuery,
   useCreateCategoryMutation,
   useDeleteCategoryMutation,

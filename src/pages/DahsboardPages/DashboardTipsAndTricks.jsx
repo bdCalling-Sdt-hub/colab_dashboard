@@ -1,31 +1,30 @@
-/* eslint-disable no-unused-vars */
 import JoditEditor from "jodit-react";
 import React, { useEffect, useRef, useState } from "react";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { toast } from "sonner";
 import {
-  useCreateContactMutation,
-  useGetContactQuery,
+  useCreateTipsTricksMutation,
+  useGetTipsTricksQuery,
 } from "../../redux/api/dashboardApi";
+import { toast } from "sonner";
 
-const Contact = () => {
+const DashboardTipsAndTricks = () => {
+  const [createTipsTricks] = useCreateTipsTricksMutation();
+  const { data: getTipsTricks } = useGetTipsTricksQuery();
   const editor = useRef(null);
   const [content, setContent] = useState("");
-  const { data: getContact } = useGetContactQuery();
-  const [updateContact] = useCreateContactMutation();
   const handleTerms = () => {
     const data = {
       description: content,
     };
-    updateContact(data)
+    createTipsTricks(data)
       .unwrap()
-      .then((payload) => toast.success("Contact create successfully!"))
+      .then((payload) => toast.success("Tips and tricks create successfully"))
       .catch((error) => toast.error(error?.data?.message));
   };
   const config = {
     readonly: false,
-    placeholder: "Start typing...",
+    placeholder: "Start typings...",
     style: {
       height: "70vh",
     },
@@ -40,32 +39,23 @@ const Contact = () => {
       "brush",
       "align",
     ],
-    events: {
-      afterInit: (editor) => {
-        // Set editor container styles after initialization
-        const editorContainer = editor.editor;
-        editorContainer.style.backgroundColor = "#323232"; // Set background color to #323232
-        editorContainer.style.color = "white"; // Set text color to white for readability
-        editorContainer.style.border = "1px solid #444"; // Optional: Add a border for better visibility
-      },
-    },
   };
   useEffect(() => {
-    if (getContact?.data?.description) {
-      setContent(getContact?.data?.description);
+    if (getTipsTricks?.data?.description) {
+      setContent(getTipsTricks?.data?.description);
     }
-  }, [getContact]);
+  }, [getTipsTricks]);
   return (
     <>
-      <div className="flex justify-between items-center  gap-2 mb-3 relative m-5">
+      <div className="flex justify-start items-center gap-2 mb-3 relative m-5">
         <div className="absolute top-6 left-2 flex items-center">
           <Link
             to={-1}
             className="py-1 px-2 rounded-md flex justify-start items-center gap-1"
           >
-            <IoArrowBackSharp className="text-black" />
+            <IoArrowBackSharp className="text-yellow" />
           </Link>{" "}
-          <p className="font-semibold">Contact</p>
+          <p className="font-semibold">Tips & Tricks</p>
         </div>
       </div>
 
@@ -81,7 +71,7 @@ const Contact = () => {
         <div className="flex items-center   justify-center mt-5">
           <button
             onClick={() => handleTerms()}
-            className="bg-button-primary  text-white px-4 py-2 rounded-lg test"
+            className="bg-yellow  text-white px-4 py-2 rounded-lg test"
           >
             Save Changes
           </button>
@@ -91,4 +81,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default DashboardTipsAndTricks;

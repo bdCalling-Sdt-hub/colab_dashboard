@@ -5,9 +5,6 @@ import AdminVerificationCode from "../pages/DahsboardPages/AdminVerificationCode
 import AdminResetPassword from "../pages/DahsboardPages/AdminResetPassword.jsx";
 import DashboardLayout from "../components/layouts/DashboardLayout.jsx";
 import DashboardHome from "../pages/DahsboardPages/DashboardHome.jsx";
-import AuctionManagment from "../pages/DahsboardPages/AuctionManagment.jsx";
-import ActiveAuctionPage from "../pages/DahsboardPages/ActiveAuctionPage.jsx";
-import OrderManagment from "../pages/DahsboardPages/OrderManagment.jsx";
 import UserManagement from "../pages/DahsboardPages/UserManagement.jsx";
 import Profile from "../pages/DahsboardPages/Profile.jsx";
 import Aboutus from "../pages/DahsboardPages/Aboutus.jsx";
@@ -33,18 +30,7 @@ const router = createBrowserRouter([
         index: true,
         element: <DashboardHome />,
       },
-      {
-        path: "autction-managment",
-        element: <AuctionManagment />,
-      },
-      {
-        path: "active-auction",
-        element: <ActiveAuctionPage />,
-      },
-      {
-        path: "order-managment",
-        element: <OrderManagment />,
-      },
+
       {
         path: "user-managment",
         element: <UserManagement />,

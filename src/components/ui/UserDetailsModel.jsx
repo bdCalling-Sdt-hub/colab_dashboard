@@ -2,7 +2,6 @@ import { Modal } from "antd";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 
 const UserDetailsModel = ({ setOpenAddModal, openAddModal, userDetails }) => {
-  console.log(userDetails);
   return (
     <Modal
       open={openAddModal}
@@ -14,59 +13,51 @@ const UserDetailsModel = ({ setOpenAddModal, openAddModal, userDetails }) => {
       className="custom-modal"
     >
       <div className="bg-[#323232] font-poppins">
-        {/* <div className="w-16 h-16 mx-auto rounded-full">
-          <img
-            className="rounded-full"
-            src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8"
-            alt=""
-          />
-        </div>
-        <div className="flex items-center flex-col">
-          <h1 className="my-3 text-xl">Mehu Khondokar 22</h1>
-
-        </div> */}
-        <div className="p-4 max-w-md mx-auto bg-[#323232] rounded-lg shadow-lg">
+        <div className="p-4 max-w-md mx-auto bg-[#323232] rounded-lg ">
           {/* Profile Section */}
           <div className="w-16 h-16 mx-auto rounded-full">
             <img
-              className="rounded-full"
-              src="https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8"
+              className="rounded-full w-16 h-16"
+              src={userDetails?.img}
               alt="User Profile"
             />
-            <RiVerifiedBadgeFill
-              className="absolute top-20 right-56"
-              fontSize={20}
-              color="#138DF0"
-            />
+            {userDetails?.isPremium && (
+              <RiVerifiedBadgeFill
+                className="absolute top-20 right-56"
+                fontSize={20}
+                color="#138DF0"
+              />
+            )}
           </div>
           <div className="flex items-center flex-col text-center">
             <h1 className="my-3 text-xl font-bold text-white">
-              Mehu Khondokar 22
+              {userDetails?.name}
             </h1>
             <div className="text-sm text-gray-400">
               <p className="my-2">
                 <span className="font-semibold text-gray-200">Main Skill:</span>{" "}
                 <span className="bg-button-primary px-2  rounded-full">
                   {" "}
-                  Singer
+                  {userDetails?.mainSkill?.name}
                 </span>
               </p>
               <p className="my-2">
                 <span className="font-semibold text-gray-200">
                   Additional Skill:
                 </span>{" "}
-                <span className="bg-button-primary text-white px-2 py-1 rounded-full text-xs">
-                  Cover Art
-                </span>{" "}
-                <span className="bg-button-primary text-white px-2 py-1 rounded-full text-xs">
-                  Music
-                </span>{" "}
-                <span className="bg-button-primary text-white px-2 py-1 rounded-full text-xs">
-                  Video
-                </span>
+                {userDetails?.additionalSkills?.map((skill, i) => (
+                  <span key={i}>
+                    <span className="bg-button-primary text-white px-2 py-1 rounded-full text-xs">
+                      {skill?.name}
+                    </span>
+                  </span>
+                ))}
               </p>
               <p>
-                <span className="font-semibold text-gray-200">Lives in:</span>{" "}
+                {/* TODO: need to show real location */}
+                <span className="font-semibold text-gray-200">
+                  Lives in:
+                </span>{" "}
                 Montreal, Quebec
               </p>
             </div>
@@ -75,9 +66,7 @@ const UserDetailsModel = ({ setOpenAddModal, openAddModal, userDetails }) => {
           {/* About Section */}
           <div className="mt-4 text-center">
             <p className="text-sm text-gray-300 leading-relaxed">
-              Hi, I’m Khushi, a vocalist with 5 years of experience specializing
-              in pop and soul music. I’m passionate about creating melodies that
-              inspire.
+              {userDetails?.bio || "Bio Not Available"}
             </p>
           </div>
         </div>

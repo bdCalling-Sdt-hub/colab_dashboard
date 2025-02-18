@@ -3,7 +3,7 @@ import { LuEye } from "react-icons/lu";
 import UserDetailsModel from "../../components/ui/UserDetailsModel";
 import { useState } from "react";
 
-const ActiveAuction = ({ dataSource }) => {
+const NewSubscriber = ({ dataSource }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [userDetails, setUserDetails] = useState({});
   const handleModel = (details) => {
@@ -76,4 +76,4 @@ const ActiveAuction = ({ dataSource }) => {
   );
 };
 
-export default ActiveAuction;
+export default NewSubscriber;
