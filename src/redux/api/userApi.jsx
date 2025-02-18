@@ -51,8 +51,8 @@ const userApi = baseApi.injectEndpoints({
     forgetPassword: builder.mutation({
       query: (data) => {
         return {
-          url: "/admin/auth/forgot-password",
-          method: "PATCH",
+          url: "auth/forget-password",
+          method: "POST",
           body: data,
         };
       },
@@ -60,8 +60,8 @@ const userApi = baseApi.injectEndpoints({
     verifyOtp: builder.mutation({
       query: (data) => {
         return {
-          url: "/admin/auth/verify-otp-forgot-password",
-          method: "PATCH",
+          url: "auth/verify-reset-otp",
+          method: "POST",
           body: data,
         };
       },
@@ -69,8 +69,17 @@ const userApi = baseApi.injectEndpoints({
     resetPassword: builder.mutation({
       query: (data) => {
         return {
-          url: "/admin/auth/reset-password",
-          method: "PATCH",
+          url: "auth/reset-password",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
+    resendResetCode: builder.mutation({
+      query: (data) => {
+        return {
+          url: "auth/resend-reset-code",
+          method: "POST",
           body: data,
         };
       },
@@ -87,4 +96,5 @@ export const {
   useForgetPasswordMutation,
   useVerifyOtpMutation,
   useResetPasswordMutation,
+  useResendResetCodeMutation,
 } = userApi;

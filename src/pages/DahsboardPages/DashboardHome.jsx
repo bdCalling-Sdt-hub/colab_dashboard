@@ -5,6 +5,7 @@ import { useGetDashboardDataQuery } from "../../redux/api/dashboardApi";
 const DashboardHome = () => {
   const { data: dashboardData, isLoading } = useGetDashboardDataQuery();
   console.log("isloading", isLoading);
+  console.log("dashboard meta data", dashboardData);
   const userTable = [
     {
       id: "1",
@@ -89,25 +90,25 @@ const DashboardHome = () => {
           <div className="flex justify-between items-center shadow-md">
             <div className="  w-full py-5 text-center bg-[#323232]  text-white border-r ">
               <p className="font-medium mt-2 text-5xl mb-4">
-                {dashboardData?.data?.totalIncome} 100
+                ${dashboardData?.data?.totalUser}
               </p>
               <p className="font-medium mb-2">Total User</p>
             </div>
             <div className="  w-full p-5 bg-[#323232]  text-white text-center border-r">
               <p className="font-medium mt-2 text-5xl mb-4">
-                {dashboardData?.data?.totalIncome} 100
+                ${dashboardData?.data?.totalSubscriber}
               </p>
               <p className="font-medium mb-2">Total Subscriber</p>
             </div>
             <div className="  w-full p-5 bg-[#323232] text-white text-center border-r">
               <p className="font-medium mt-2 text-5xl mb-4">
-                {dashboardData?.data?.totalIncome} 100
+                ${dashboardData?.data?.totalCategory}
               </p>
               <p className="font-medium mb-2">Total Category</p>
             </div>
             <div className="   w-full p-5 bg-[#323232] text-center  text-white ">
               <p className="font-medium mt-2 text-5xl mb-4">
-                {dashboardData?.data?.totalIncome} 100
+                ${dashboardData?.data?.totalEarning}
               </p>
               <p className="font-medium mb-2">Total Earning</p>
             </div>

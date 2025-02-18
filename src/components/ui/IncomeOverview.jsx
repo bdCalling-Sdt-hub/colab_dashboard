@@ -12,34 +12,32 @@ import {
   BarChart,
   Bar,
 } from "recharts";
-import { useGetDashboardChartQuery } from "../../redux/api/dashboardApi";
+import {
+  useGetSubscriptionChartDataQuery,
+  useGetUserChartDataQuery,
+} from "../../redux/api/dashboardApi";
 
 const IncomeOverview = () => {
-  const [year, setYear] = useState("2024");
-  const { data: getDashboardOverview, isLoading } =
-    useGetDashboardChartQuery(year);
-  const items = [
-    {
-      label: 2023,
-      key: "2023",
-      value: "2023",
-    },
-    {
-      label: 2024,
-      key: "2024",
-      value: "2024",
-    },
-    {
-      label: 2025,
-      key: "2025",
-      value: "2025",
-    },
-    {
-      label: 2026,
-      key: "2026",
-      value: "2026",
-    },
-  ];
+  const currentYear = new Date().getFullYear();
+  const [year, setYear] = useState(`${currentYear}`);
+  const [userYear, setUserYear] = useState(`${currentYear}`);
+  const { data: userChartData, isLoading: userChartLoading } =
+    useGetUserChartDataQuery(userYear);
+  const { data: subscriptionChartData, isLoading: subscriptionChartLoading } =
+    useGetSubscriptionChartDataQuery(year);
+
+  console.log("user chart data", userChartData);
+  console.log("subscription chart data", subscriptionChartData);
+  const startYear = 2024;
+
+  const items = Array.from({ length: currentYear - startYear + 1 }, (_, i) => {
+    const year = startYear + i;
+    return {
+      label: year,
+      key: `${year}`,
+      value: `${year}`,
+    };
+  });
 
   const data = [
     { name: "Jan", uv: 800 },
@@ -57,31 +55,25 @@ const IncomeOverview = () => {
     { name: "Dec", uv: 800 },
   ];
 
-  const chartData = [
-    { month: "Jan", totalIncome: 100 },
-    { month: "Feb", totalIncome: 1300 },
-    { month: "Mar", totalIncome: 1250 },
-    { month: "Apr", totalIncome: 200 },
-    { month: "May", totalIncome: 1500 },
-    { month: "June", totalIncome: 400 },
-    { month: "July", totalIncome: 1450 },
-    { month: "Aug", totalIncome: 1550 },
-    { month: "Sept", totalIncome: 100 },
-    { month: "Oct", totalIncome: 1700 },
-    { month: "Nov", totalIncome: 1200 },
-    { month: "Dec", totalIncome: 300 },
-  ];
-
   // const chartDataFormat = getDashboardOverview?.data?.chartData?.map(
-  const chartDataFormat = chartData?.map((chart, i) => {
+  const chartDataFormat = subscriptionChartData?.data?.map((chart, i) => {
     return {
       name: chart?.month,
-      uv: chart?.totalIncome,
+      uv: chart?.totalSubscriber,
+    };
+  });
+  const userChartDataFormat = userChartData?.data?.map((chart, i) => {
+    return {
+      name: chart?.month,
+      uv: chart?.totalUser,
     };
   });
 
-  const handleChange = (value) => {
+  const handleSubscriptionYearChange = (value) => {
     setYear(value);
+  };
+  const handleUserYearChange = (value) => {
+    setUserYear(value);
   };
   return (
     <>
@@ -99,13 +91,9 @@ const IncomeOverview = () => {
             <div className="flex gap-3">
               <Select
                 style={{ width: 150 }}
-                onChange={handleChange}
-                defaultValue="2025"
-                options={[
-                  { value: 2025, label: 2025 },
-                  { value: 2025, label: 2025 },
-                  { value: 2025, label: 2025 },
-                ]}
+                onChange={handleSubscriptionYearChange}
+                defaultValue={currentYear}
+                options={items}
               />
             </div>
           </div>
@@ -159,19 +147,16 @@ const IncomeOverview = () => {
             <div className="flex gap-3">
               <Select
                 style={{ width: 150 }}
-                onChange={handleChange}
-                defaultValue="2025"
-                options={[
-                  { value: 2025, label: 2025 },
-                  { value: 2025, label: 2025 },
-                  { value: 2025, label: 2025 },
-                ]}
+                onChange={handleUserYearChange}
+                defaultValue={currentYear}
+                options={items}
               />
             </div>
           </div>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
-              data={data}
+              // data={data}
+              data={userChartDataFormat}
               // style={{ backgroundColor: "#323232  " }}
               // margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
             >

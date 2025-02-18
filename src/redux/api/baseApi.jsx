@@ -7,7 +7,7 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders: (headers) => {
     const token = JSON.parse(localStorage.getItem("token"));
     if (token) {
-      headers.set("Authorization", `Bearer ${token}`);
+      headers.set("Authorization", `${token}`);
     }
     return headers;
   },

@@ -3,10 +3,18 @@ import { baseApi } from "./baseApi";
 const dashboardApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     /** Dashboard chart api */
-    getDashboardChart: builder.query({
+    getUserChartData: builder.query({
       query: (year) => {
         return {
-          url: `/dashboard/get-income-chart-data?year=${year}`,
+          url: `/meta/user-chart-data?year=${year}`,
+          method: "GET",
+        };
+      },
+    }),
+    getSubscriptionChartData: builder.query({
+      query: (year) => {
+        return {
+          url: `/meta/subscription-chart-data?year=${year}`,
           method: "GET",
         };
       },
@@ -14,7 +22,7 @@ const dashboardApi = baseApi.injectEndpoints({
     getDashboardData: builder.query({
       query: () => {
         return {
-          url: "/dashboard/get-dashboard-meta-data",
+          url: "/meta/get-dashboard-meta-data",
           method: "GET",
         };
       },
@@ -429,7 +437,8 @@ const dashboardApi = baseApi.injectEndpoints({
 export const {
   useGetDashboardDataQuery,
   useGetAllAuctionQuery,
-  useGetDashboardChartQuery,
+  useGetUserChartDataQuery,
+  useGetSubscriptionChartDataQuery,
   useDeleteAuctionMutation,
   useCreateAuctionMutation,
   useGetAllOrderQuery,
