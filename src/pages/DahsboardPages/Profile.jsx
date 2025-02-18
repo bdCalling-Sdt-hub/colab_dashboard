@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { Button, Form, Input, Spin } from "antd";
 import { IoCameraOutline } from "react-icons/io5";
+import { imageUrl } from "../../redux/api/baseApi";
 import {
   useChangePasswordMutation,
   useGetUserProfileQuery,
@@ -14,6 +16,7 @@ const Profile = () => {
   const [changePassword] = useChangePasswordMutation();
   const navigate = useNavigate();
   const { data: getProfile } = useGetUserProfileQuery();
+  console.log("get profile", getProfile);
   const [image, setImage] = useState(null);
   const [form] = Form.useForm();
   const [tab, setTab] = useState(
@@ -47,8 +50,9 @@ const Profile = () => {
       .catch((error) => toast.error(error?.data?.message));
   };
   const onEditProfile = (values) => {
+    const { email, ...other } = values;
     const formData = new FormData();
-    formData.append("data", JSON.stringify(values));
+    formData.append("data", JSON.stringify(other));
     if (image) {
       formData.append("profile_image", image);
     }
@@ -85,7 +89,7 @@ const Profile = () => {
               src={`${
                 image
                   ? URL.createObjectURL(image)
-                  : `${getProfile?.data?.profile_image}`
+                  : `${imageUrl}${getProfile?.data?.profile_image}`
               }`}
               alt=""
               className="border-2 shadow-md border-[#C924ED] p-[2px] object-cover"

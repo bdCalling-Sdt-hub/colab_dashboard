@@ -32,7 +32,7 @@ const userApi = baseApi.injectEndpoints({
     updateUserProfile: builder.mutation({
       query: (data) => {
         return {
-          url: "/admin/auth/update-profile",
+          url: "/super-admin/update-profile",
           method: "PATCH",
           body: data,
         };
