@@ -25,9 +25,6 @@ const IncomeOverview = () => {
     useGetUserChartDataQuery(userYear);
   const { data: subscriptionChartData, isLoading: subscriptionChartLoading } =
     useGetSubscriptionChartDataQuery(year);
-
-  console.log("user chart data", userChartData);
-  console.log("subscription chart data", subscriptionChartData);
   const startYear = 2024;
 
   const items = Array.from({ length: currentYear - startYear + 1 }, (_, i) => {
@@ -39,23 +36,6 @@ const IncomeOverview = () => {
     };
   });
 
-  const data = [
-    { name: "Jan", uv: 800 },
-    { name: "Feb", uv: 200 },
-    { name: "Mar", uv: 900 },
-    { name: "Apr", uv: 700 },
-    { name: "May", uv: 1500 },
-    { name: "Jun", uv: 800 },
-    { name: "Jul", uv: 400 },
-    { name: "Aug", uv: 500 },
-    { name: "Sep", uv: 900 },
-    { name: "Oct", uv: 1000 },
-
-    { name: "Nov", uv: 100 },
-    { name: "Dec", uv: 800 },
-  ];
-
-  // const chartDataFormat = getDashboardOverview?.data?.chartData?.map(
   const chartDataFormat = subscriptionChartData?.data?.map((chart, i) => {
     return {
       name: chart?.month,
@@ -82,7 +62,6 @@ const IncomeOverview = () => {
           className="w-full h-[400px] shadow-xl"
           style={{
             backgroundColor: "#323232",
-            // padding: "10px",
             borderRadius: "8px",
           }}
         >
@@ -110,7 +89,6 @@ const IncomeOverview = () => {
               }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#555" />{" "}
-              {/* Light grid lines */}
               <XAxis dataKey="name" stroke="#fff" />
               <YAxis dataKey={"uv"} stroke="#fff" />
               <Tooltip
@@ -154,12 +132,7 @@ const IncomeOverview = () => {
             </div>
           </div>
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              // data={data}
-              data={userChartDataFormat}
-              // style={{ backgroundColor: "#323232  " }}
-              // margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-            >
+            <BarChart data={userChartDataFormat}>
               <CartesianGrid strokeDasharray="3 3" stroke="#555" />
               <XAxis dataKey="name" stroke="#fff" />
               <YAxis stroke="#fff" />
@@ -172,7 +145,6 @@ const IncomeOverview = () => {
                 itemStyle={{ color: "#fff" }}
                 labelStyle={{ color: "#fff" }}
               />
-              {/* Adjust barSize to increase bar width */}
               <Bar
                 dataKey="uv"
                 fill="#b4007e"
