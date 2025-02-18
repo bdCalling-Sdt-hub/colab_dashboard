@@ -67,16 +67,20 @@ const UserManagement = () => {
       key: "action",
       render: (_, record) => (
         <div className="flex items-center gap-2">
-          {record?.is_block ? (
+          {record?.user?.status == "blocked" ? (
             <button
-              onClick={() => handleBlockUnBlockUser(record?.email, false)}
+              onClick={() =>
+                handleBlockUnBlockUser(record?.user._id, "in-progress")
+              }
               className="bg-[#d9000a] text-white p-2 rounded"
             >
               <MdBlock size={20} />
             </button>
           ) : (
             <button
-              onClick={() => handleBlockUnBlockUser(record?.email, true)}
+              onClick={() =>
+                handleBlockUnBlockUser(record?.user._id, "blocked")
+              }
               className="bg-gray text-white p-2 rounded"
             >
               <MdBlock size={20} />
@@ -108,12 +112,13 @@ const UserManagement = () => {
     dob: user?.date_of_birth?.slice("T")?.[0] || "Not available",
     location: user?.location || "Not available",
     isPremium: user?.isPremium,
+    user: user?.user,
   }));
 
-  const handleBlockUnBlockUser = (email, is_block) => {
+  const handleBlockUnBlockUser = (id, status) => {
     const data = {
-      email: email,
-      is_block: is_block,
+      id: id,
+      status: status,
     };
     blockUnblockUser(data)
       .unwrap()

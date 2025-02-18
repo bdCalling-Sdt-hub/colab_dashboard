@@ -134,9 +134,9 @@ const dashboardApi = baseApi.injectEndpoints({
     blockUnblockUser: builder.mutation({
       query: (data) => {
         return {
-          url: "/dashboard/auth/block-unblock-user",
+          url: `user/change-status/${data?.id}`,
           method: "PATCH",
-          body: data,
+          body: { status: data?.status },
         };
       },
       invalidatesTags: ["userManagement"],
