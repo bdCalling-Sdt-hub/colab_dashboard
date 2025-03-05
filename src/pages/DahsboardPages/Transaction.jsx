@@ -18,8 +18,6 @@ const Transaction = () => {
       : {}),
   });
 
-  console.log("transaction data", transactions);
-
   const onChange = (page) => {
     setCurrentPage(page);
   };
@@ -127,10 +125,7 @@ const Transaction = () => {
           columns={columns}
           className="custom-pagination"
           pagination={false}
-          loading={{
-            spinning: isLoading,
-            indicator: <Spin size="large" className="text-yellow" />,
-          }}
+          loading={isLoading}
           locale={
             isLoading
               ? { emptyText: <Empty description="No Transactions Found" /> }

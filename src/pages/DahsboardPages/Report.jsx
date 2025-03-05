@@ -12,12 +12,8 @@ const Report = () => {
   const [searchParams, setSearchParams] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const { data: getAllTransaction, isLoading } = useGetTransactionQuery({
-    searchParams,
-    page: currentPage,
-    limit: pageSize,
-  });
-  const { data: reportData } = useGetAllReportQuery({
+
+  const { data: reportData, isLoading } = useGetAllReportQuery({
     searchParams,
     page: currentPage,
     limit: pageSize,
@@ -115,10 +111,7 @@ const Report = () => {
           columns={columns}
           className="custom-pagination"
           pagination={false}
-          loading={{
-            spinning: isLoading,
-            indicator: <Spin size="large" className="text-yellow" />,
-          }}
+          loading={isLoading}
           locale={
             isLoading
               ? { emptyText: <Empty description="No Transactions Found" /> }
@@ -129,8 +122,8 @@ const Report = () => {
           <Pagination
             current={currentPage}
             onChange={onChange}
-            total={getAllTransaction?.data?.meta?.total}
-            pageSize={getAllTransaction?.data?.meta?.limit}
+            total={reportData?.data?.meta?.total}
+            pageSize={reportData?.data?.meta?.limit}
             showSizeChanger={false}
             showTotal={(total, range) =>
               `Showing ${range[0]}-${range[1]} out of ${total}`

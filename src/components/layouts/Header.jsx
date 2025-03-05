@@ -31,7 +31,7 @@ const Header = () => {
         <img
           className="h-12 w-12 rounded-full border border-yellow p-[1px] object-cover"
           // src={`${getUserInfo?.data?.profile_image}`}
-          src={`https://i.pravatar.cc/150?img=${1}`}
+          src={`${imageUrl}${getUserInfo?.data?.profile_image}`}
           alt=""
         />
         <p className="font-medium text-[20px] text-white pl-4">
