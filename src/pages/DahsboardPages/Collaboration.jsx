@@ -1,17 +1,21 @@
+/* eslint-disable no-unused-vars */
 import { Empty, Pagination, Spin, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import { useGetTransactionQuery } from "../../redux/api/dashboardApi";
 import formatDate from "../../utils/dateFormat";
+import { useGetAllCollaborationQuery } from "../../redux/api/collaborationApi";
+import { imageUrl } from "../../redux/api/baseApi";
 const Collaboration = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  const { data: getAllTransaction, isLoading } = useGetTransactionQuery({
+  const { data: collaborations, isLoading } = useGetAllCollaborationQuery({
     page: currentPage,
     limit: pageSize,
   });
+
+  console.log("collaborations", collaborations);
 
   const onChange = (page) => {
     setCurrentPage(page);
@@ -29,22 +33,16 @@ const Collaboration = () => {
       dataIndex: "sender",
       key: "sender",
       render: (_, record, i) => {
-        console.log("record", record);
         return (
           <div className="flex items-center gap-2">
-            {/* <img
-              src={record?.img}
-              className="w-[40px] h-[40px] rounded-[8px]"
-              alt=""
-            /> */}
             <img
-              src={`https://i.pravatar.cc/150?img=${i + 1}`}
+              src={`${imageUrl}${record?.sender?.profile_image}`}
               className="w-[40px] h-[40px] rounded-[8px]"
               alt=""
             />
             <div>
               <p className="font-medium">{record?.sender?.name}</p>
-              <p>{record?.sender?.mainSkill}</p>
+              <p>{record?.sender?.mainSkill?.name}</p>
             </div>
           </div>
         );
@@ -55,18 +53,17 @@ const Collaboration = () => {
       dataIndex: "sender",
       key: "sender",
       render: (_, record, i) => {
-        console.log("record", record);
         return (
           <div className="flex items-center gap-2">
             <img
               // src={record?.img}
-              src={`https://i.pravatar.cc/150?img=${i + 1}`}
+              src={`${imageUrl}${record?.receiver?.profile_image}`}
               className="w-[40px] h-[40px] rounded-[8px]"
               alt=""
             />
             <div>
               <p className="font-medium">{record?.receiver?.name}</p>
-              <p>{record?.receiver?.mainSkill}</p>
+              <p>{record?.receiver?.mainSkill?.name}</p>
             </div>
           </div>
         );
@@ -89,88 +86,13 @@ const Collaboration = () => {
       key: "startDateTime",
     },
   ];
-
-  /**Table data format */
-  const tableDataFirst10 = [
-    {
-      sender: { name: "Manik Sarker", mainSkill: "Singer" },
-      receiver: { name: "Anik Sarker", mainSkill: "Dancer" },
-      location: "New York, USA",
-      amount: 100,
-      startDateTime: "2025-01-10T12:00:00Z",
-    },
-    {
-      sender: { name: "Alice Brown", mainSkill: "Developer" },
-      receiver: { name: "Bob White", mainSkill: "Designer" },
-      location: "London, UK",
-      amount: 50,
-      startDateTime: "2025-01-10T12:05:00Z",
-    },
-    {
-      sender: { name: "Charlie Gray", mainSkill: "Manager" },
-      receiver: { name: "David Black", mainSkill: "Artist" },
-      location: "Paris, France",
-      amount: 200,
-      startDateTime: "2025-01-10T12:10:00Z",
-    },
-    {
-      sender: { name: "Eve Green", mainSkill: "Developer" },
-      receiver: { name: "Frank Blue", mainSkill: "Architect" },
-      location: "Berlin, Germany",
-      amount: 150,
-      startDateTime: "2025-01-10T12:15:00Z",
-    },
-    {
-      sender: { name: "Grace Red", mainSkill: "Product Manager" },
-      receiver: { name: "Hannah Violet", mainSkill: "Photographer" },
-      location: "Sydney, Australia",
-      amount: 120,
-      startDateTime: "2025-01-10T12:20:00Z",
-    },
-    {
-      sender: { name: "Ivy Yellow", mainSkill: "Writer" },
-      receiver: { name: "Jack Black", mainSkill: "Artist" },
-      location: "Toronto, Canada",
-      amount: 80,
-      startDateTime: "2025-01-10T12:25:00Z",
-    },
-    {
-      sender: { name: "Liam White", mainSkill: "Marketing" },
-      receiver: { name: "Mia Pink", mainSkill: "Data Scientist" },
-      location: "Tokyo, Japan",
-      amount: 60,
-      startDateTime: "2025-01-10T12:30:00Z",
-    },
-    {
-      sender: { name: "Olivia Brown", mainSkill: "Consultant" },
-      receiver: { name: "Paul Green", mainSkill: "Sales" },
-      location: "Mumbai, India",
-      amount: 300,
-      startDateTime: "2025-01-10T12:35:00Z",
-    },
-    {
-      sender: { name: "Quinn Gray", mainSkill: "Entrepreneur" },
-      receiver: { name: "Rita Red", mainSkill: "Engineer" },
-      location: "Cape Town, South Africa",
-      amount: 90,
-      startDateTime: "2025-01-10T12:40:00Z",
-    },
-    {
-      sender: { name: "Sophie Blue", mainSkill: "Musician" },
-      receiver: { name: "Tom Yellow", mainSkill: "Writer" },
-      location: "Rio de Janeiro, Brazil",
-      amount: 250,
-      startDateTime: "2025-01-10T12:45:00Z",
-    },
-  ];
-  // const tableData = getAllTransaction?.data?.result?.map((item, i) => {
-  const tableData = tableDataFirst10?.map((item, i) => {
+  const tableData = collaborations?.data?.result?.map((item, i) => {
     return {
       key: (currentPage - 1) * pageSize + (i + 1),
       sender: item?.sender,
       receiver: item?.receiver,
       location: item?.location,
-      amount: item?.amount,
+      amount: item?.price,
       startDateTime: formatDate(item?.startDateTime),
     };
   });
@@ -220,8 +142,8 @@ const Collaboration = () => {
           <Pagination
             current={currentPage}
             onChange={onChange}
-            total={getAllTransaction?.data?.meta?.total}
-            pageSize={getAllTransaction?.data?.meta?.limit}
+            total={collaborations?.data?.meta?.total}
+            pageSize={collaborations?.data?.meta?.limit}
             showSizeChanger={false}
             showTotal={(total, range) =>
               `Showing ${range[0]}-${range[1]} out of ${total}`
