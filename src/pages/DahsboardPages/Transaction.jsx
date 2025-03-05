@@ -2,17 +2,19 @@ import { Empty, Pagination, Select, Spin, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import { CiSearch } from "react-icons/ci";
-import { useGetTransactionQuery } from "../../redux/api/dashboardApi";
+import { useGetAllTransactionQuery } from "../../redux/api/transactionApi";
+import { imageUrl } from "../../redux/api/baseApi";
 const Transaction = () => {
   const [searchParams, setSearchParams] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const { data: getAllTransaction, isLoading } = useGetTransactionQuery({
+  const { data: transactions, isLoading } = useGetAllTransactionQuery({
     searchParams,
     page: currentPage,
     limit: pageSize,
   });
+
+  console.log("transaction data", transactions);
 
   const onChange = (page) => {
     setCurrentPage(page);
@@ -171,20 +173,18 @@ const Transaction = () => {
     },
   ];
 
-  console.log(tableDataFirst10);
-
   /**Table data format */
   // const tableData = getAllTransaction?.data?.result?.map((item, i) => {
-  const tableData = tableDataFirst10?.map((item, i) => {
+  const tableData = transactions?.data?.result?.map((item, i) => {
     return {
       key: (currentPage - 1) * pageSize + (i + 1),
-      name: item?.name,
+      name: item?.user?.name,
       // img: item?.profile_image,
-      img: `https://i.pravatar.cc/150?img=${i + 1}`,
+      img: `${imageUrl}${item?.user?.profile_image}`,
       email: item?.email,
       type: item?.type,
       transactionId: item?.transactionId,
-      date: item?.date,
+      date: item?.createdAt,
       amount: item?.amount,
     };
   });
@@ -237,8 +237,8 @@ const Transaction = () => {
           <Pagination
             current={currentPage}
             onChange={onChange}
-            total={getAllTransaction?.data?.meta?.total}
-            pageSize={getAllTransaction?.data?.meta?.limit}
+            total={transactions?.data?.meta?.total}
+            pageSize={transactions?.data?.meta?.limit}
             showSizeChanger={false}
             showTotal={(total, range) =>
               `Showing ${range[0]}-${range[1]} out of ${total}`
