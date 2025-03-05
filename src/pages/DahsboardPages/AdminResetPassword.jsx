@@ -14,7 +14,6 @@ const AdminResetPassword = () => {
       password: values?.password,
       confirmPassword: values?.confirmPassword,
     };
-    console.log("data", data);
     resetPassword(data)
       .unwrap()
       .then((payload) => {

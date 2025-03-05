@@ -4,7 +4,6 @@ const reportApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllTransaction: builder.query({
       query: ({ searchParams, limit, page, transactionType }) => {
-        console.log("transaction type", transactionType);
         const params = new URLSearchParams();
         if (searchParams) params.append("searchTerm", searchParams);
         if (page) params.append("page", page);

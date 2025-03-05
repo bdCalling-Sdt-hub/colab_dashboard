@@ -15,8 +15,6 @@ const Collaboration = () => {
     limit: pageSize,
   });
 
-  console.log("collaborations", collaborations);
-
   const onChange = (page) => {
     setCurrentPage(page);
     setPageSize(1);

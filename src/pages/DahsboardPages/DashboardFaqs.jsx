@@ -34,7 +34,6 @@ const DashboardFaqs = () => {
     createFaq(values)
       .unwrap()
       .then((payload) => {
-        console.log("payload", payload);
         toast.success("FAQ create successfully!");
         form.resetFields();
       })

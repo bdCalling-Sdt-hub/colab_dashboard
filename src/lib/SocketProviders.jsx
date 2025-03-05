@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createContext, useContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
@@ -9,7 +10,6 @@ export const useSocketContext = () => {
 const SocketProviders = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [socketId, setSocketId] = useState(null);
-  console.log(socketId);
   const [notifications, setNotifications] = useState([]);
   // const [notificationLimit, setNotificationLimit] = useState(50)
   const [newNotifications, setNewNotification] = useState(0);

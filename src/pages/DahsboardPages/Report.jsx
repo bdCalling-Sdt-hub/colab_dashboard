@@ -19,8 +19,6 @@ const Report = () => {
     limit: pageSize,
   });
 
-  console.log("report data", reportData);
-
   const onChange = (page) => {
     setCurrentPage(page);
   };
