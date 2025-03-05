@@ -50,7 +50,6 @@ const Report = () => {
             <div>
               <p className="font-medium">{record?.reportFrom?.name}</p>
               <p>{record?.reportFrom?.mainSkill?.name}</p>{" "}
-              {/* Accessing mainSkill name */}
             </div>
           </div>
         );
@@ -71,7 +70,6 @@ const Report = () => {
             <div>
               <p className="font-medium">{record?.reportTo?.name}</p>
               <p>{record?.reportTo?.mainSkill?.name}</p>{" "}
-              {/* Accessing mainSkill name */}
             </div>
           </div>
         );
