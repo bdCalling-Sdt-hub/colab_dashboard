@@ -74,11 +74,6 @@ const SideBar = () => {
           icon: <></>,
         },
         {
-          path: "/contact",
-          label: "Contact",
-          icon: <></>,
-        },
-        {
           path: "/privacy-policy",
           label: "Privacy Policy",
           icon: <></>,
