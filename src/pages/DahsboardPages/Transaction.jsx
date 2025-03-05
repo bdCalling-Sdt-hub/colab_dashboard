@@ -8,10 +8,14 @@ const Transaction = () => {
   const [searchParams, setSearchParams] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [transactionType, setTransactionType] = useState(null);
   const { data: transactions, isLoading } = useGetAllTransactionQuery({
     searchParams,
     page: currentPage,
     limit: pageSize,
+    ...(transactionType !== null && transactionType !== undefined
+      ? { transactionType }
+      : {}),
   });
 
   console.log("transaction data", transactions);
@@ -70,109 +74,6 @@ const Transaction = () => {
     },
   ];
 
-  const tableDataFirst10 = [
-    {
-      key: 1,
-      name: "John Doe",
-      img: "https://randomuser.me/api/portraits/men/1.jpg",
-      email: "john.doe@example.com",
-      type: "Credit",
-      transactionId: "txn123",
-      amount: 100,
-      date: "2025-01-10T12:00:00Z",
-    },
-    {
-      key: 2,
-      name: "Jane Smith",
-      img: "https://randomuser.me/api/portraits/women/2.jpg",
-      email: "jane.smith@example.com",
-      type: "Debit",
-      transactionId: "txn124",
-      amount: 50,
-      date: "2025-01-10T12:05:00Z",
-    },
-    {
-      key: 3,
-      name: "Alice Brown",
-      img: "https://randomuser.me/api/portraits/women/3.jpg",
-      email: "alice.brown@example.com",
-      type: "Credit",
-      transactionId: "txn125",
-      amount: 200,
-      date: "2025-01-10T12:10:00Z",
-    },
-    {
-      key: 4,
-      name: "Bob White",
-      img: "https://randomuser.me/api/portraits/men/4.jpg",
-      email: "bob.white@example.com",
-      type: "Debit",
-      transactionId: "txn126",
-      amount: 150,
-      date: "2025-01-10T12:15:00Z",
-    },
-    {
-      key: 5,
-      name: "Eve Green",
-      img: "https://randomuser.me/api/portraits/women/5.jpg",
-      email: "eve.green@example.com",
-      type: "Credit",
-      transactionId: "txn127",
-      amount: 120,
-      date: "2025-01-10T12:20:00Z",
-    },
-    {
-      key: 6,
-      name: "Charlie Gray",
-      img: "https://randomuser.me/api/portraits/men/6.jpg",
-      email: "charlie.gray@example.com",
-      type: "Debit",
-      transactionId: "txn128",
-      amount: 80,
-      date: "2025-01-10T12:25:00Z",
-    },
-    {
-      key: 7,
-      name: "David Black",
-      img: "https://randomuser.me/api/portraits/men/7.jpg",
-      email: "david.black@example.com",
-      type: "Credit",
-      transactionId: "txn129",
-      amount: 60,
-      date: "2025-01-10T12:30:00Z",
-    },
-    {
-      key: 8,
-      name: "Grace Red",
-      img: "https://randomuser.me/api/portraits/women/8.jpg",
-      email: "grace.red@example.com",
-      type: "Debit",
-      transactionId: "txn130",
-      amount: 300,
-      date: "2025-01-10T12:35:00Z",
-    },
-    {
-      key: 9,
-      name: "Frank Blue",
-      img: "https://randomuser.me/api/portraits/men/9.jpg",
-      email: "frank.blue@example.com",
-      type: "Credit",
-      transactionId: "txn131",
-      amount: 90,
-      date: "2025-01-10T12:40:00Z",
-    },
-    {
-      key: 10,
-      name: "Hannah Violet",
-      img: "https://randomuser.me/api/portraits/women/10.jpg",
-      email: "hannah.violet@example.com",
-      type: "Debit",
-      transactionId: "txn132",
-      amount: 250,
-      date: "2025-01-10T12:45:00Z",
-    },
-  ];
-
   /**Table data format */
   // const tableData = getAllTransaction?.data?.result?.map((item, i) => {
   const tableData = transactions?.data?.result?.map((item, i) => {
@@ -189,8 +90,6 @@ const Transaction = () => {
     };
   });
 
-  const handleChange = async () => {};
-
   return (
     <div className="bg-[#323232] rounded-md p-5">
       <div className="flex justify-between item-center mb-5">
@@ -204,17 +103,22 @@ const Transaction = () => {
         </div>
         <div>
           <Select
+            value={transactionType}
+            onChange={(value) => setTransactionType(value)}
+            placeholder="Filter by Premium Status"
             style={{ width: 200 }}
-            onChange={handleChange}
-            defaultValue="All Transaction"
-            options={[
-              {
-                value: "purchase-subscription",
-                label: "Purchase Subscription",
-              },
-              { value: "renew-subscription", label: "Renew Subscription" },
-            ]}
-          />
+          >
+            <Select.Option value={null}>All Transaction</Select.Option>
+            <Select.Option value={"Purchase Subscription"}>
+              Purchase Subscription
+            </Select.Option>
+            <Select.Option value={"Renew Subscription"}>
+              Renew Subscription
+            </Select.Option>
+            <Select.Option value={"Collaboration"}>
+              Collaboration Payment
+            </Select.Option>
+          </Select>
         </div>
       </div>
       <div className="mt-2 ">
