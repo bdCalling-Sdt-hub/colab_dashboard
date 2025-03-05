@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Badge } from "antd";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";

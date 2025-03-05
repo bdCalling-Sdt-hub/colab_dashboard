@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Select, Table } from "antd";
 import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
@@ -23,7 +24,6 @@ const UserManagement = () => {
     ...(isPremium !== null && isPremium !== undefined ? { isPremium } : {}),
   });
   const [blockUnblockUser, { isLoading }] = useBlockUnblockUserMutation();
-  console.log("isLoading", isLoading);
   const handleModel = (details) => {
     setUserDetails(details);
     setOpenAddModal(true);
@@ -139,15 +139,6 @@ const UserManagement = () => {
             </span>
           </div>
           <div className="flex gap-3">
-            {/* <Select
-              style={{ width: 150 }}
-              onChange={handleChange}
-              defaultValue="All"
-              options={[
-                { value: "premium", label: "Premium User" },
-                { value: "normal", label: "Normal User" },
-              ]}
-            /> */}
             <Select
               value={isPremium}
               onChange={(value) => setIsPremium(value)}

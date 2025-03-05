@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Form, Input, Modal, Popconfirm, Spin, Table, Upload } from "antd";
 import { useEffect, useState } from "react";
 import { CiEdit } from "react-icons/ci";
