@@ -125,7 +125,7 @@ const dashboardApi = baseApi.injectEndpoints({
           params.append("isPremium", isPremium);
         }
         return {
-          url: `/normal-user/all-users?${params.toString()}`,
+          url: `/normal-user/get-all-user-for-admin?${params.toString()}`,
           method: "GET",
         };
       },
