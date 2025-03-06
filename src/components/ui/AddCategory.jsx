@@ -175,7 +175,13 @@ const AddCategory = ({ getAllCategory }) => {
   ];
 
   // Format the data for the table
-  const categoryFormattedData = categoryData?.map((category, i) => ({
+  // const categoryFormattedData = categoryData?.map((category, i) => ({
+  //   id: category?._id,
+  //   key: i + 1,
+  //   categoryName: category?.name,
+  //   imageUrl: category?.image,
+  // }));
+  const categoryFormattedData = getAllCategory?.data?.map((category, i) => ({
     id: category?._id,
     key: i + 1,
     categoryName: category?.name,

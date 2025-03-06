@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import AddCategory from "../../components/ui/AddCategory";
 import AddBanner from "../../components/ui/AddBanner";
 import CategoryModal from "../../components/ui/CategoryModal";
-import { useGetAllCategoryQuery } from "../../redux/api/dashboardApi";
+import { useGetAllCategoryQuery } from "../../redux/api/categoryApi";
 
 const Category = () => {
-  const { data: getAllCategory } = useGetAllCategoryQuery();
-
+  const { data: categories, isLoading } = useGetAllCategoryQuery();
+  console.log("categories", categories, isLoading);
   const [category, setCategory] = useState(true);
   const [openAddModal, setOpenAddModal] = useState(false);
   // const [openCategoryModal, setOpenCategoryModal] = useState(false)
@@ -56,11 +56,7 @@ const Category = () => {
         </button>
       </div>
 
-      {category ? (
-        <AddCategory getAllCategory={getAllCategory} />
-      ) : (
-        <AddBanner />
-      )}
+      {category ? <AddCategory getAllCategory={categories} /> : <AddBanner />}
       <CategoryModal
         setOpenAddModal={setOpenAddModal}
         openAddModal={openAddModal}

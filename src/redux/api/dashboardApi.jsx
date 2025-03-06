@@ -29,15 +29,6 @@ const dashboardApi = baseApi.injectEndpoints({
     }),
 
     /** Category Api */
-    getAllCategory: builder.query({
-      query: () => {
-        return {
-          url: "/category",
-          method: "GET",
-        };
-      },
-      providesTags: ["category"],
-    }),
     createCategory: builder.mutation({
       query: (formData) => {
         return {
