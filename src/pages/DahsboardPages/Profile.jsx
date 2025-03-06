@@ -16,7 +16,6 @@ const Profile = () => {
   const [changePassword] = useChangePasswordMutation();
   const navigate = useNavigate();
   const { data: getProfile } = useGetUserProfileQuery();
-  console.log("get profile", getProfile);
   const [image, setImage] = useState(null);
   const [form] = Form.useForm();
   const [tab, setTab] = useState(

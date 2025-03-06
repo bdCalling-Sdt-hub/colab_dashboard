@@ -18,7 +18,6 @@ const AdminVerificationCode = () => {
       email: localStorage.getItem("email"),
       resetCode: Number(otp),
     };
-    console.log(data);
     verifyOtp(data)
       .unwrap()
       .then((payload) => {
