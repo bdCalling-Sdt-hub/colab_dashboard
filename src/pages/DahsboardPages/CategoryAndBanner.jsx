@@ -9,7 +9,6 @@ import { useGetAllCategoryQuery } from "../../redux/api/categoryApi";
 
 const Category = () => {
   const { data: categories, isLoading } = useGetAllCategoryQuery();
-  console.log("categories", categories, isLoading);
   const [category, setCategory] = useState(true);
   const [openAddModal, setOpenAddModal] = useState(false);
   // const [openCategoryModal, setOpenCategoryModal] = useState(false)
@@ -56,7 +55,11 @@ const Category = () => {
         </button>
       </div>
 
-      {category ? <AddCategory getAllCategory={categories} /> : <AddBanner />}
+      {category ? (
+        <AddCategory getAllCategory={categories} isLoading={isLoading} />
+      ) : (
+        <AddBanner />
+      )}
       <CategoryModal
         setOpenAddModal={setOpenAddModal}
         openAddModal={openAddModal}

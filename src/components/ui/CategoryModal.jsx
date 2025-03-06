@@ -2,8 +2,8 @@ import { Form, Input, Modal, Spin, Upload } from "antd";
 import { useState } from "react";
 import Button from "./Button";
 import { PlusOutlined } from "@ant-design/icons";
-import { useCreateCategoryMutation } from "../../redux/api/dashboardApi";
 import { toast } from "sonner";
+import { useCreateCategoryMutation } from "../../redux/api/categoryApi";
 
 const CategoryModal = ({ setOpenAddModal, openAddModal }) => {
   // const [isModalOpen, isModalOpen] = useState(false);

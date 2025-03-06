@@ -5,13 +5,14 @@ import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Button from "./Button";
 import { PlusOutlined } from "@ant-design/icons";
+import { toast } from "sonner";
 import {
   useDeleteCategoryMutation,
   useUpdateCategoryMutation,
-} from "../../redux/api/dashboardApi";
-import { toast } from "sonner";
+} from "../../redux/api/categoryApi";
+import { imageUrl } from "../../redux/api/baseApi";
 
-const AddCategory = ({ getAllCategory }) => {
+const AddCategory = ({ getAllCategory, isLoading: categoryGetLoading }) => {
   const [deleteCategory] = useDeleteCategoryMutation();
   const [updateCategoryData, { isLoading }] = useUpdateCategoryMutation();
   const [fileList, setFileList] = useState([]);
@@ -92,15 +93,16 @@ const AddCategory = ({ getAllCategory }) => {
       title: "Image",
       dataIndex: "image",
       key: "image",
-      render: (text, record, i) => (
-        <img
-          className="rounded-md "
-          // src={record.imageUrl}
-          src={`https://i.pravatar.cc/150?img=${i + 1}`}
-          alt={record.categoryName}
-          style={{ width: 50, height: 50 }}
-        />
-      ),
+      render: (text, record, i) => {
+        return (
+          <img
+            className="rounded-md "
+            src={`${imageUrl}${record?.imageUrl}`}
+            alt={record.categoryName}
+            style={{ width: 50, height: 50 }}
+          />
+        );
+      },
     },
     {
       title: "Action",
@@ -136,56 +138,12 @@ const AddCategory = ({ getAllCategory }) => {
       ),
     },
   ];
-  const categoryData = [
-    {
-      id: "60d5f4d3e4b0f1a1c2c0b3e7",
-      key: 1,
-      name: "Singer",
-      imageUrl:
-        "https://fakeimg.pl/300x200/ff0000/000000/?text=Electronics&font=lobster",
-    },
-    {
-      id: "60d5f4d3e4b0f1a1c2c0b3e8",
-      key: 2,
-      name: "Music",
-      imageUrl:
-        "https://fakeimg.pl/300x200/00ff00/000000/?text=Clothing&font=lobster",
-    },
-    {
-      id: "60d5f4d3e4b0f1a1c2c0b3e9",
-      key: 3,
-      name: "Dancing",
-      imageUrl:
-        "https://fakeimg.pl/300x200/0000ff/000000/?text=Furniture&font=lobster",
-    },
-    {
-      id: "60d5f4d3e4b0f1a1c2c0b3ea",
-      key: 4,
-      name: "Toys",
-      imageUrl:
-        "https://fakeimg.pl/300x200/ffff00/000000/?text=Toys&font=lobster",
-    },
-    {
-      id: "60d5f4d3e4b0f1a1c2c0b3eb",
-      key: 5,
-      name: "Books",
-      imageUrl:
-        "https://fakeimg.pl/300x200/ff00ff/000000/?text=Books&font=lobster",
-    },
-  ];
 
-  // Format the data for the table
-  // const categoryFormattedData = categoryData?.map((category, i) => ({
-  //   id: category?._id,
-  //   key: i + 1,
-  //   categoryName: category?.name,
-  //   imageUrl: category?.image,
-  // }));
   const categoryFormattedData = getAllCategory?.data?.map((category, i) => ({
     id: category?._id,
     key: i + 1,
     categoryName: category?.name,
-    imageUrl: category?.image,
+    imageUrl: category?.category_image,
   }));
 
   return (
@@ -195,6 +153,7 @@ const AddCategory = ({ getAllCategory }) => {
         dataSource={categoryFormattedData}
         className="custom-pagination"
         pagination={false}
+        loading={categoryGetLoading}
       />
 
       {/* Edit category Modal */}
@@ -255,7 +214,6 @@ const AddCategory = ({ getAllCategory }) => {
           </div>
         </Form> */}
         <Form layout="vertical" form={form} onFinish={handleUpdateCategory}>
-          {/* Category Name */}
           <Form.Item
             label={<span className="text-white">Category Name</span>}
             name="name"
@@ -271,7 +229,6 @@ const AddCategory = ({ getAllCategory }) => {
             />
           </Form.Item>
 
-          {/* Image Upload */}
           <Form.Item
             label={<span className="text-white">Image</span>}
             style={{ width: "100%" }}
@@ -296,9 +253,7 @@ const AddCategory = ({ getAllCategory }) => {
             </div>
           </Form.Item>
 
-          {/* Buttons */}
           <div className="flex justify-between gap-3">
-            {/* Save Button */}
             <Form.Item className="w-full">
               <Button
                 disabled={isLoading}
@@ -309,7 +264,6 @@ const AddCategory = ({ getAllCategory }) => {
               </Button>
             </Form.Item>
 
-            {/* Cancel Button */}
             <Form.Item className="w-full">
               <button
                 className="bg-[#d9000a] text-white w-full p-1 rounded-md hover:bg-red-700"
