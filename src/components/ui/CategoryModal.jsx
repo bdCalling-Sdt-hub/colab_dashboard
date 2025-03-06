@@ -74,6 +74,7 @@ const CategoryModal = ({ setOpenAddModal, openAddModal }) => {
               listType="picture-card"
               fileList={fileList}
               onChange={handleUploadChange}
+              multiple={false}
               beforeUpload={() => false}
               className="upload-full-width"
               maxCount={1}

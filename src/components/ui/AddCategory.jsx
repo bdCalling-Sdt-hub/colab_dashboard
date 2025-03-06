@@ -33,7 +33,8 @@ const AddCategory = ({ getAllCategory, isLoading: categoryGetLoading }) => {
             uid: "-1",
             name: "image.png",
             status: "done",
-            url: modalData.imageUrl,
+            // url: modalData.imageUrl,
+            url: `${imageUrl}${modalData.imageUrl}`,
           },
         ]);
       } else {
