@@ -29,35 +29,6 @@ const dashboardApi = baseApi.injectEndpoints({
     }),
 
     /** Category Api */
-    createCategory: builder.mutation({
-      query: (formData) => {
-        return {
-          url: "/category/create-category",
-          method: "POST",
-          body: formData,
-        };
-      },
-      invalidatesTags: ["category"],
-    }),
-    deleteCategory: builder.mutation({
-      query: (id) => {
-        return {
-          url: `/category/delete-category/${id}`,
-          method: "DELETE",
-        };
-      },
-      invalidatesTags: ["category"],
-    }),
-    updateCategory: builder.mutation({
-      query: ({ formData, id }) => {
-        return {
-          url: `/category/update-category/${id}`,
-          method: "PATCH",
-          body: formData,
-        };
-      },
-      invalidatesTags: ["category"],
-    }),
 
     /** dashboard banner api  */
     getBanner: builder.query({
