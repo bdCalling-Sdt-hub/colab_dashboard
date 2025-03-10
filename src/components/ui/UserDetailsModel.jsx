@@ -1,5 +1,7 @@
 import { Modal } from "antd";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
+import defaultProfileImage from "../../assets/defult_profile_image.png";
+import { imageUrl } from "../../redux/api/baseApi";
 
 const UserDetailsModel = ({ setOpenAddModal, openAddModal, userDetails }) => {
   return (
@@ -18,7 +20,11 @@ const UserDetailsModel = ({ setOpenAddModal, openAddModal, userDetails }) => {
           <div className="w-16 h-16 mx-auto rounded-full">
             <img
               className="rounded-full w-16 h-16"
-              src={userDetails?.img}
+              src={
+                userDetails?.img != imageUrl
+                  ? userDetails?.img
+                  : defaultProfileImage
+              }
               alt="User Profile"
             />
             {userDetails?.isPremium && (

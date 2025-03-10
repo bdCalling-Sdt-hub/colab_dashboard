@@ -278,3 +278,19 @@
 .custom-jodit-editor .jodit-ui-group_line_true {
   justify-content: flex-end;
 }
+
+.custom-input .ant-input::placeholder {
+  color: gray !important; /* Change placeholder color to gray */
+}
+
+/* Global placeholder text color for all Ant Design Inputs */
+/* Change the placeholder text color globally for all Ant Design Inputs */
+.ant-input::placeholder {
+  color: gray !important; /* Ensure it overrides default styles */
+}
+
+/* For other input types as well */
+input::placeholder,
+textarea::placeholder {
+  color: gray !important;
+}

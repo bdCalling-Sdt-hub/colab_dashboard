@@ -73,6 +73,9 @@ const AdminLogin = () => {
                 backgroundColor: "#323232",
                 color: "white",
               }}
+              placeholderStyle={{
+                color: "red",
+              }}
             />
           </Form.Item>
 

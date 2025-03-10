@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { LuEye } from "react-icons/lu";
 import UserDetailsModel from "../../components/ui/UserDetailsModel";
 import { imageUrl } from "../../redux/api/baseApi";
-
+import defaultProfileImage from "../../assets/defult_profile_image.png";
 const UserManagement = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [userDetails, setUserDetails] = useState({});
@@ -42,7 +42,7 @@ const UserManagement = () => {
         return (
           <div className="flex items-center gap-2">
             <img
-              src={record?.img}
+              src={record?.img != imageUrl ? record.img : defaultProfileImage}
               className="w-[40px] h-[40px] rounded-[8px]"
               alt=""
             />

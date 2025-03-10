@@ -19,12 +19,17 @@ import Contact from "../pages/DahsboardPages/Contact.jsx";
 import Help from "../pages/DahsboardPages/Help.jsx";
 import Collaboration from "../pages/DahsboardPages/Collaboration.jsx";
 import Report from "../pages/DahsboardPages/Report.jsx";
+import PrivateRoutes from "./PrivateRoutes.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    // element : <PrivateRoutes><DashboardLayout/></PrivateRoutes>,
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoutes>
+        <DashboardLayout />
+      </PrivateRoutes>
+    ),
+    // element: <DashboardLayout />,
     children: [
       {
         index: true,
