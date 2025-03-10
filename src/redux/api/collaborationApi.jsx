@@ -3,9 +3,9 @@ import { baseApi } from "./baseApi";
 const collaborationApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllCollaboration: builder.query({
-      query: () => {
+      query: ({ page }) => {
         return {
-          url: "/collaboration/all-collaborations",
+          url: `/collaboration/all-collaborations?page=${page}`,
           method: "GET",
         };
       },
