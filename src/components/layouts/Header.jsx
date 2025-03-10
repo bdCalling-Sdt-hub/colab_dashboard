@@ -6,6 +6,7 @@ import { useGetUserProfileQuery } from "../../redux/api/userApi";
 import { useSocketContext } from "../../lib/SocketProviders";
 import { useReadNotificationMutation } from "../../redux/api/dashboardApi";
 import { imageUrl } from "../../redux/api/baseApi";
+import defaultProfileImage from "../../assets/defult_profile_image.png";
 const Header = () => {
   const { newNotifications } = useSocketContext();
   const [readNotification] = useReadNotificationMutation();
@@ -32,7 +33,11 @@ const Header = () => {
         <img
           className="h-12 w-12 rounded-full border border-yellow p-[1px] object-cover"
           // src={`${getUserInfo?.data?.profile_image}`}
-          src={`${imageUrl}${getUserInfo?.data?.profile_image}`}
+          src={
+            getUserInfo?.data?.profile_image
+              ? `${imageUrl}${getUserInfo?.data?.profile_image}`
+              : `${defaultProfileImage}`
+          }
           alt=""
         />
         <p className="font-medium text-[20px] text-white pl-4">

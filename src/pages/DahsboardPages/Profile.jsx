@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Form, Input, Spin } from "antd";
 import { IoCameraOutline } from "react-icons/io5";
 import { imageUrl } from "../../redux/api/baseApi";
+import defaultProfileImage from "../../assets/defult_profile_image.png";
 import {
   useChangePasswordMutation,
   useGetUserProfileQuery,
@@ -88,7 +89,9 @@ const Profile = () => {
               src={`${
                 image
                   ? URL.createObjectURL(image)
-                  : `${imageUrl}${getProfile?.data?.profile_image}`
+                  : getProfile?.data?.profile_image
+                  ? `${imageUrl}${getProfile?.data?.profile_image}`
+                  : `${defaultProfileImage}`
               }`}
               alt=""
               className="border-2 shadow-md border-[#C924ED] p-[2px] object-cover"

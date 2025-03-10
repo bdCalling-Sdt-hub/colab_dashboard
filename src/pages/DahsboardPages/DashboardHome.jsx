@@ -36,19 +36,19 @@ const DashboardHome = () => {
           <div className="flex justify-between items-center shadow-md">
             <div className="  w-full py-5 text-center bg-[#323232]  text-white border-r ">
               <p className="font-medium mt-2 text-5xl mb-4">
-                ${dashboardData?.data?.totalUser}
+                {dashboardData?.data?.totalUser}
               </p>
               <p className="font-medium mb-2">Total User</p>
             </div>
             <div className="  w-full p-5 bg-[#323232]  text-white text-center border-r">
               <p className="font-medium mt-2 text-5xl mb-4">
-                ${dashboardData?.data?.totalSubscriber}
+                {dashboardData?.data?.totalSubscriber}
               </p>
               <p className="font-medium mb-2">Total Subscriber</p>
             </div>
             <div className="  w-full p-5 bg-[#323232] text-white text-center border-r">
               <p className="font-medium mt-2 text-5xl mb-4">
-                ${dashboardData?.data?.totalCategory}
+                {dashboardData?.data?.totalCategory}
               </p>
               <p className="font-medium mb-2">Total Category</p>
             </div>
