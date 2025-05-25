@@ -7,7 +7,6 @@ import { CiSearch } from "react-icons/ci";
 import { useGetTransactionQuery } from "../../redux/api/dashboardApi";
 import formatDate from "../../utils/dateFormat";
 import { useGetAllReportQuery } from "../../redux/api/reportApi";
-import { baseApi, imageUrl } from "../../redux/api/baseApi";
 const Report = () => {
   const [searchParams, setSearchParams] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,7 +36,7 @@ const Report = () => {
         return (
           <div className="flex items-center gap-2">
             <img
-              src={`${imageUrl}${record?.reportFrom?.profile_image}`}
+              src={`${record?.reportFrom?.profile_image}`}
               className="w-[40px] h-[40px] rounded-[8px]"
               alt=""
             />
@@ -57,7 +56,7 @@ const Report = () => {
         return (
           <div className="flex items-center gap-2">
             <img
-              src={`${imageUrl}${record?.reportTo?.profile_image}`}
+              src={`${record?.reportTo?.profile_image}`}
               className="w-[40px] h-[40px] rounded-[8px]"
               alt=""
             />
@@ -98,9 +97,7 @@ const Report = () => {
           <Link to={-1}>
             <FaArrowLeft size={18} className="text-white " />
           </Link>
-          <span className="font-semibold text-white text-[20px]">
-            Collaboration Management
-          </span>
+          <span className="font-semibold text-white text-[20px]">Collaboration Management</span>
         </div>
       </div>
       <div className="mt-2 ">
@@ -110,11 +107,7 @@ const Report = () => {
           className="custom-pagination"
           pagination={false}
           loading={isLoading}
-          locale={
-            isLoading
-              ? { emptyText: <Empty description="No Transactions Found" /> }
-              : {}
-          }
+          locale={isLoading ? { emptyText: <Empty description="No Transactions Found" /> } : {}}
         />
         <div className="flex items-center  justify-center mt-5">
           <Pagination
@@ -123,9 +116,7 @@ const Report = () => {
             total={reportData?.data?.meta?.total}
             pageSize={reportData?.data?.meta?.limit}
             showSizeChanger={false}
-            showTotal={(total, range) =>
-              `Showing ${range[0]}-${range[1]} out of ${total}`
-            }
+            showTotal={(total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`}
           />
         </div>
       </div>

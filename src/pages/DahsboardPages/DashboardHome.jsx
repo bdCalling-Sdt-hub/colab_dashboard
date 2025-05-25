@@ -2,12 +2,8 @@
 import IncomeOverview from "../../components/ui/IncomeOverview";
 import { Link } from "react-router-dom";
 import NewSubscriber from "./NewSubscriber";
-import {
-  useGetAllUsersQuery,
-  useGetDashboardDataQuery,
-} from "../../redux/api/dashboardApi";
+import { useGetAllUsersQuery, useGetDashboardDataQuery } from "../../redux/api/dashboardApi";
 import { useState } from "react";
-import { imageUrl } from "../../redux/api/baseApi";
 const DashboardHome = () => {
   const [searchParams, setSearchParams] = useState("");
   const { data: dashboardData } = useGetDashboardDataQuery();
@@ -17,9 +13,7 @@ const DashboardHome = () => {
     key: i + 1,
     name: user?.name,
     // img: user?.profile_image,
-    img: user?.profile_image.startsWith("https")
-      ? user.profile_image
-      : `${imageUrl}${user?.profile_image}`,
+    img: user?.profile_image.startsWith("https") ? user.profile_image : `${user?.profile_image}`,
     email: user?.email,
     mainSkill: user?.mainSkill,
     additionalSkills: user?.additionalSkills,
@@ -35,9 +29,7 @@ const DashboardHome = () => {
           {/* stastics card */}
           <div className="flex justify-between items-center shadow-md">
             <div className="  w-full py-5 text-center bg-[#323232]  text-white border-r ">
-              <p className="font-medium mt-2 text-5xl mb-4">
-                {dashboardData?.data?.totalUser}
-              </p>
+              <p className="font-medium mt-2 text-5xl mb-4">{dashboardData?.data?.totalUser}</p>
               <p className="font-medium mb-2">Total User</p>
             </div>
             <div className="  w-full p-5 bg-[#323232]  text-white text-center border-r">
@@ -47,15 +39,11 @@ const DashboardHome = () => {
               <p className="font-medium mb-2">Total Subscriber</p>
             </div>
             <div className="  w-full p-5 bg-[#323232] text-white text-center border-r">
-              <p className="font-medium mt-2 text-5xl mb-4">
-                {dashboardData?.data?.totalCategory}
-              </p>
+              <p className="font-medium mt-2 text-5xl mb-4">{dashboardData?.data?.totalCategory}</p>
               <p className="font-medium mb-2">Total Category</p>
             </div>
             <div className="   w-full p-5 bg-[#323232] text-center  text-white ">
-              <p className="font-medium mt-2 text-5xl mb-4">
-                ${dashboardData?.data?.totalEarning}
-              </p>
+              <p className="font-medium mt-2 text-5xl mb-4">${dashboardData?.data?.totalEarning}</p>
               <p className="font-medium mb-2">Total Earning</p>
             </div>
           </div>

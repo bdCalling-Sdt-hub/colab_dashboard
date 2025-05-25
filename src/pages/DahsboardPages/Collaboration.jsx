@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import formatDate from "../../utils/dateFormat";
 import { useGetAllCollaborationQuery } from "../../redux/api/collaborationApi";
-import { imageUrl } from "../../redux/api/baseApi";
 const Collaboration = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -34,7 +33,7 @@ const Collaboration = () => {
         return (
           <div className="flex items-center gap-2">
             <img
-              src={`${imageUrl}${record?.sender?.profile_image}`}
+              src={`${record?.sender?.profile_image}`}
               className="w-[40px] h-[40px] rounded-[8px]"
               alt=""
             />
@@ -55,7 +54,7 @@ const Collaboration = () => {
           <div className="flex items-center gap-2">
             <img
               // src={record?.img}
-              src={`${imageUrl}${record?.receiver?.profile_image}`}
+              src={`${record?.receiver?.profile_image}`}
               className="w-[40px] h-[40px] rounded-[8px]"
               alt=""
             />
@@ -102,9 +101,7 @@ const Collaboration = () => {
           <Link to={-1}>
             <FaArrowLeft size={18} className="text-white " />
           </Link>
-          <span className="font-semibold text-white text-[20px]">
-            Collaboration Management
-          </span>
+          <span className="font-semibold text-white text-[20px]">Collaboration Management</span>
         </div>
         {/* <div>
           <div className="relative">
@@ -130,11 +127,7 @@ const Collaboration = () => {
             spinning: isLoading,
             indicator: <Spin size="large" className="text-yellow" />,
           }}
-          locale={
-            isLoading
-              ? { emptyText: <Empty description="No Transactions Found" /> }
-              : {}
-          }
+          locale={isLoading ? { emptyText: <Empty description="No Transactions Found" /> } : {}}
         />
         <div className="flex items-center  justify-center mt-5">
           <Pagination
@@ -143,9 +136,7 @@ const Collaboration = () => {
             total={collaborations?.data?.meta?.total}
             pageSize={collaborations?.data?.meta?.limit}
             showSizeChanger={false}
-            showTotal={(total, range) =>
-              `Showing ${range[0]}-${range[1]} out of ${total}`
-            }
+            showTotal={(total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`}
           />
         </div>
       </div>

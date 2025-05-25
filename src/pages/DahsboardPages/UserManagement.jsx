@@ -5,14 +5,10 @@ import { CiSearch } from "react-icons/ci";
 import { FaArrowLeft } from "react-icons/fa";
 import { MdBlock } from "react-icons/md";
 import { Link } from "react-router-dom";
-import {
-  useBlockUnblockUserMutation,
-  useGetAllUsersQuery,
-} from "../../redux/api/dashboardApi";
+import { useBlockUnblockUserMutation, useGetAllUsersQuery } from "../../redux/api/dashboardApi";
 import { toast } from "sonner";
 import { LuEye } from "react-icons/lu";
 import UserDetailsModel from "../../components/ui/UserDetailsModel";
-import { imageUrl } from "../../redux/api/baseApi";
 import defaultProfileImage from "../../assets/defult_profile_image.png";
 const UserManagement = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -42,7 +38,7 @@ const UserManagement = () => {
         return (
           <div className="flex items-center gap-2">
             <img
-              src={record?.img != imageUrl ? record.img : defaultProfileImage}
+              src={record?.img || defaultProfileImage}
               className="w-[40px] h-[40px] rounded-[8px]"
               alt=""
             />
@@ -69,18 +65,14 @@ const UserManagement = () => {
         <div className="flex items-center gap-2">
           {record?.user?.status == "blocked" ? (
             <button
-              onClick={() =>
-                handleBlockUnBlockUser(record?.user._id, "in-progress")
-              }
+              onClick={() => handleBlockUnBlockUser(record?.user._id, "in-progress")}
               className="bg-[#d9000a] text-white p-2 rounded"
             >
               <MdBlock size={20} />
             </button>
           ) : (
             <button
-              onClick={() =>
-                handleBlockUnBlockUser(record?.user._id, "blocked")
-              }
+              onClick={() => handleBlockUnBlockUser(record?.user._id, "blocked")}
               className="bg-gray text-white p-2 rounded"
             >
               <MdBlock size={20} />
@@ -102,9 +94,7 @@ const UserManagement = () => {
     key: i + 1,
     name: user?.name,
     // img: user?.profile_image,
-    img: user?.profile_image.startsWith("https")
-      ? user.profile_image
-      : `${imageUrl}${user?.profile_image}`,
+    img: user?.profile_image.startsWith("https") ? user.profile_image : `${user?.profile_image}`,
     email: user?.email,
     mainSkill: user?.mainSkill,
     additionalSkills: user?.additionalSkills,
@@ -134,9 +124,7 @@ const UserManagement = () => {
             <Link to={-1}>
               <FaArrowLeft size={18} className="text-white " />
             </Link>
-            <span className="font-semibold text-white text-[20px]">
-              User Management
-            </span>
+            <span className="font-semibold text-white text-[20px]">User Management</span>
           </div>
           <div className="flex gap-3">
             <Select
@@ -173,8 +161,7 @@ const UserManagement = () => {
             loading={userDataLoading}
             pagination={{
               pageSize: 10,
-              showTotal: (total, range) =>
-                `Showing ${range[0]}-${range[1]} out of ${total}`,
+              showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,
               locale: {
                 items_per_page: "",
                 prev_page: "Previous",

@@ -1,7 +1,6 @@
 import { Modal } from "antd";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import defaultProfileImage from "../../assets/defult_profile_image.png";
-import { imageUrl } from "../../redux/api/baseApi";
 
 const UserDetailsModel = ({ setOpenAddModal, openAddModal, userDetails }) => {
   return (
@@ -20,11 +19,7 @@ const UserDetailsModel = ({ setOpenAddModal, openAddModal, userDetails }) => {
           <div className="w-16 h-16 mx-auto rounded-full">
             <img
               className="rounded-full w-16 h-16"
-              src={
-                userDetails?.img != imageUrl
-                  ? userDetails?.img
-                  : defaultProfileImage
-              }
+              src={userDetails?.img || defaultProfileImage}
               alt="User Profile"
             />
             {userDetails?.isPremium && (
@@ -36,9 +31,7 @@ const UserDetailsModel = ({ setOpenAddModal, openAddModal, userDetails }) => {
             )}
           </div>
           <div className="flex items-center flex-col text-center">
-            <h1 className="my-3 text-xl font-bold text-white">
-              {userDetails?.name}
-            </h1>
+            <h1 className="my-3 text-xl font-bold text-white">{userDetails?.name}</h1>
             <div className="text-sm text-gray-400">
               <p className="my-2">
                 <span className="font-semibold text-gray-200">Main Skill:</span>{" "}
@@ -48,9 +41,7 @@ const UserDetailsModel = ({ setOpenAddModal, openAddModal, userDetails }) => {
                 </span>
               </p>
               <p className="my-2">
-                <span className="font-semibold text-gray-200">
-                  Additional Skill:
-                </span>{" "}
+                <span className="font-semibold text-gray-200">Additional Skill:</span>{" "}
                 {userDetails?.additionalSkills?.map((skill, i) => (
                   <span key={i}>
                     <span className="bg-button-primary text-white px-2 py-1 rounded-full text-xs">
@@ -61,10 +52,7 @@ const UserDetailsModel = ({ setOpenAddModal, openAddModal, userDetails }) => {
               </p>
               <p>
                 {/* TODO: need to show real location */}
-                <span className="font-semibold text-gray-200">
-                  Lives in:
-                </span>{" "}
-                Montreal, Quebec
+                <span className="font-semibold text-gray-200">Lives in:</span> Montreal, Quebec
               </p>
             </div>
           </div>

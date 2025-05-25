@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { Button, Form, Input, Spin } from "antd";
 import { IoCameraOutline } from "react-icons/io5";
-import { imageUrl } from "../../redux/api/baseApi";
 import defaultProfileImage from "../../assets/defult_profile_image.png";
 import {
   useChangePasswordMutation,
@@ -78,19 +77,14 @@ const Profile = () => {
       <div className="rounded-md  bg-[#323232]">
         <div className=" py-9 px-10 rounded flex items-center justify-center flex-col gap-6 bg-[#252525] text-white">
           <div className="relative w-[140px] h-[124px] mx-auto bg-black">
-            <input
-              type="file"
-              onInput={handleChange}
-              id="img"
-              style={{ display: "none" }}
-            />
+            <input type="file" onInput={handleChange} id="img" style={{ display: "none" }} />
             <img
               style={{ width: 140, height: 140, borderRadius: "100%" }}
               src={`${
                 image
                   ? URL.createObjectURL(image)
                   : getProfile?.data?.profile_image
-                  ? `${imageUrl}${getProfile?.data?.profile_image}`
+                  ? `${getProfile?.data?.profile_image}`
                   : `${defaultProfileImage}`
               }`}
               alt=""
@@ -158,9 +152,7 @@ const Profile = () => {
             <Form onFinish={onEditProfile} layout="vertical" form={form}>
               <Form.Item
                 name="name"
-                label={
-                  <p className="text-[16px] text-white font-normal">Name</p>
-                }
+                label={<p className="text-[16px] text-white font-normal">Name</p>}
               >
                 <Input
                   style={{
@@ -182,9 +174,7 @@ const Profile = () => {
 
               <Form.Item
                 name="email"
-                label={
-                  <p className="text-[16px] text-white font-normal">Email</p>
-                }
+                label={<p className="text-[16px] text-white font-normal">Email</p>}
               >
                 <Input
                   style={{
@@ -261,11 +251,7 @@ const Profile = () => {
             <Form layout="vertical" onFinish={onFinish} form={form}>
               <Form.Item
                 name="oldPassword"
-                label={
-                  <p className="text-[16px] text-white font-normal">
-                    Current Password
-                  </p>
-                }
+                label={<p className="text-[16px] text-white font-normal">Current Password</p>}
               >
                 <Input
                   style={{
@@ -287,11 +273,7 @@ const Profile = () => {
 
               <Form.Item
                 name="newPassword"
-                label={
-                  <p className="text-[16px] text-white font-normal">
-                    New Password
-                  </p>
-                }
+                label={<p className="text-[16px] text-white font-normal">New Password</p>}
               >
                 <Input
                   style={{
@@ -313,11 +295,7 @@ const Profile = () => {
 
               <Form.Item
                 name="confirmNewPassword"
-                label={
-                  <p className="text-[16px] text-white font-normal">
-                    Retype New Password
-                  </p>
-                }
+                label={<p className="text-[16px] text-white font-normal">Retype New Password</p>}
               >
                 <Input
                   style={{
@@ -336,9 +314,7 @@ const Profile = () => {
                   }}
                 />
               </Form.Item>
-              {passError && (
-                <p className="text-yellow -mt-4 my-5 ">{passError}</p>
-              )}
+              {passError && <p className="text-yellow -mt-4 my-5 ">{passError}</p>}
               <Form.Item
                 style={{
                   marginBottom: 0,

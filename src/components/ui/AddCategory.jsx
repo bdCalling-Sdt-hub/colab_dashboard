@@ -6,11 +6,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import Button from "./Button";
 import { PlusOutlined } from "@ant-design/icons";
 import { toast } from "sonner";
-import {
-  useDeleteCategoryMutation,
-  useUpdateCategoryMutation,
-} from "../../redux/api/categoryApi";
-import { imageUrl } from "../../redux/api/baseApi";
+import { useDeleteCategoryMutation, useUpdateCategoryMutation } from "../../redux/api/categoryApi";
 
 const AddCategory = ({ getAllCategory, isLoading: categoryGetLoading }) => {
   const [deleteCategory] = useDeleteCategoryMutation();
@@ -34,7 +30,7 @@ const AddCategory = ({ getAllCategory, isLoading: categoryGetLoading }) => {
             name: "image.png",
             status: "done",
             // url: modalData.imageUrl,
-            url: `${imageUrl}${modalData.imageUrl}`,
+            url: `${modalData.imageUrl}`,
           },
         ]);
       } else {
@@ -98,7 +94,7 @@ const AddCategory = ({ getAllCategory, isLoading: categoryGetLoading }) => {
         return (
           <img
             className="rounded-md "
-            src={`${imageUrl}${record?.imageUrl}`}
+            src={`${record?.imageUrl}`}
             alt={record.categoryName}
             style={{ width: 50, height: 50 }}
           />
@@ -128,10 +124,7 @@ const AddCategory = ({ getAllCategory, isLoading: categoryGetLoading }) => {
             okText="Yes"
             cancelText="No"
           >
-            <a
-              href="#delete"
-              className="bg-[#D9000A] hover:text-white text-white p-1 rounded-sm"
-            >
+            <a href="#delete" className="bg-[#D9000A] hover:text-white text-white p-1 rounded-sm">
               <RiDeleteBin6Line size={20} color="white" />
             </a>
           </Popconfirm>
@@ -169,9 +162,7 @@ const AddCategory = ({ getAllCategory, isLoading: categoryGetLoading }) => {
         }}
         className="custom-modal"
       >
-        <h1 className="text-center font-medium mb-5 text-white">
-          Edit Category
-        </h1>
+        <h1 className="text-center font-medium mb-5 text-white">Edit Category</h1>
         {/* <Form layout="vertical" form={form} onFinish={handleUpdateCategory}>
           <Form.Item label="Category Name" name="name" className="text-white">
             <Input defaultValue={modalData?.categoryName} />
@@ -230,10 +221,7 @@ const AddCategory = ({ getAllCategory, isLoading: categoryGetLoading }) => {
             />
           </Form.Item>
 
-          <Form.Item
-            label={<span className="text-white">Image</span>}
-            style={{ width: "100%" }}
-          >
+          <Form.Item label={<span className="text-white">Image</span>} style={{ width: "100%" }}>
             <div style={{ width: "100%" }}>
               <Upload
                 listType="picture-card"

@@ -35,7 +35,7 @@ const Header = () => {
           // src={`${getUserInfo?.data?.profile_image}`}
           src={
             getUserInfo?.data?.profile_image
-              ? `${imageUrl}${getUserInfo?.data?.profile_image}`
+              ? `${getUserInfo?.data?.profile_image}`
               : `${defaultProfileImage}`
           }
           alt=""
